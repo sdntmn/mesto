@@ -13,17 +13,41 @@
       <header class="header page__cover">
         <img class="logo" src="./images/Vector.svg" alt="Логотип сайта" />
       </header>
-      <section class="profilles">
-        <ul class="profille page__cover">
-          <li class="profille__card">
+      <section class="profilles page__cover">
+        <ul class="profille">
+          <li class="profille__info">
             <img
-              class="profille__img"
+              class="profille__avatar"
               src="./images/image.jpg"
               alt="Фото пользователя"
             />
-            <p class="profille__name">Жак-Ив Кусто</p>
-            <h1 class="profille__specialization">Исследователь океана</h1>
-            <div class="profille__button-add"></div>
+            <div class="profille__data">
+              <div class="profille__name">
+                <span>Жак-Ив Кусто</span>
+                <a href="#" class="profille__name-change"></a>
+              </div>
+              <div class="form" type="checkbox" disabled>
+                <a href="#" class="form__close"></a>
+                <h2 class="form__title">Редактировать профиль</h2>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  value="Жак-Ив Кусто"
+                  class="form__name"
+                />
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  value="Исследователь океана"
+                  class="form__specialization"
+                />
+                <button type="submit" class="form__button">Сохранить</button>
+              </div>
+              <h1 class="profille__specialization">Исследователь океана</h1>
+            </div>
+            <a href="#" class="profille__button"></a>
           </li>
         </ul>
       </section>
@@ -89,7 +113,7 @@
         </section>
       </main>
       <footer class="footer page__cover">
-        <span class="footer__text">© 2020 Mesto Russia</span>
+        <span class="footer__text">&copy; 2020 Mesto Russia</span>
       </footer>
     </div>
   </body>
