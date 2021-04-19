@@ -1,0 +1,27 @@
+.profille__button {
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 1);
+  border-radius: 2px;
+  max-width: 150px;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  right: 0;
+  bottom: calc(50% - 25px);
+  background-image: url(../../../images/plus.svg);
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+@media (max-width: 584px) {
+  .profille__button {
+    bottom: 0;
+    max-width: 282px;
+  }
+}
+
+.profille__button:hover {
+  opacity: 60%;
+}

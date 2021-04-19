@@ -3,3 +3,10 @@
   max-height: 33px;
   height: 100%;
 }
+
+@media (max-width: 320px) {
+  .logo {
+    max-height: 24.4px;
+    padding-left: 8px;
+  }
+}

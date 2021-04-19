@@ -1,0 +1,23 @@
+.form__title {
+  margin: 0;
+  position: relative;
+  max-height: 23px;
+  padding: 0;
+  padding-bottom: 54px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: rgba(0, 0, 0, 1);
+}
+
+@media (max-width: 584px) {
+  .form__title {
+    font-size: 18px;
+    line-height: 22px;
+    max-width: 238px;
+    width: 100%;
+    white-space: nowrap;
+    padding-bottom: 75px;
+  }
+}

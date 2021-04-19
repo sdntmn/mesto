@@ -1,0 +1,13 @@
+.profille__info {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media (max-width: 584px) {
+  .profille__info {
+    flex-direction: column;
+    height: 286px;
+  }
+}
