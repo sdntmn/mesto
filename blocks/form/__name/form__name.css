@@ -1,0 +1,20 @@
+.form__name {
+  position: relative;
+  margin: 0;
+  max-height: 14px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0;
+  padding-bottom: 13px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(0, 0, 0, 1);
+}
+
+@media (max-width: 584px) {
+  .form__name {
+    padding-bottom: 8px;
+  }
+}

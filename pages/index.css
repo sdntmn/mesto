@@ -12,3 +12,36 @@
 /* Блок /header/ */
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
+
+/* Section "profilles" */
+@import url(../blocks/profilles/profilles.css);
+@import url(../blocks/profille/profille.css);
+@import url(../blocks/profille/__info/profille__info.css);
+@import url(../blocks/profille/__avatar/profille__avatar.css);
+@import url(../blocks/profille/__data/profille__data.css);
+@import url(../blocks/profille/__name/profille__name.css);
+@import url(../blocks/profille/__name-change/profille__name-change.css);
+@import url(../blocks/profille/__img/proffille__img.css);
+@import url(../blocks/profille/__specialization/profille__specialization.css);
+@import url(../blocks/profille/__button/profille__button.css);
+
+/* Блок Form */
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__close/form__close.css);
+@import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__name/form__name.css);
+@import url(../blocks/form/__specialization/form__specialization.css);
+@import url(../blocks/form/__button/form__button.css);
+
+/* Блок Main  */
+@import url(../blocks/content/content.css);
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__img/element__img.css);
+@import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/element/__name-mesto/element__name-mesto.css);
+@import url(../blocks/element/__like/element__like.css);
+
+/* Блок Footer  */
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__text/footer__text.css);
