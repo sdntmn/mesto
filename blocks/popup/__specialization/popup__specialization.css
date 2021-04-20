@@ -1,4 +1,4 @@
-.form__specialization {
+.popup__specialization {
   margin: 0;
   height: 14px;
   border: none;
@@ -13,7 +13,7 @@
 }
 
 @media (max-width: 320px) {
-  .form__specialization {
+  .popup__specialization {
     padding-bottom: 8px;
   }
 }

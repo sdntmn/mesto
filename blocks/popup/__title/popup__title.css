@@ -1,4 +1,4 @@
-.form__title {
+.popup__title {
   margin: 0;
   position: relative;
   max-height: 23px;
@@ -12,7 +12,7 @@
 }
 
 @media (max-width: 584px) {
-  .form__title {
+  .popup__title {
     font-size: 18px;
     line-height: 22px;
     max-width: 238px;

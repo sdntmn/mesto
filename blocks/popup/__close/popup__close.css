@@ -1,4 +1,4 @@
-.form__close {
+.popup__close {
   position: absolute;
   max-width: calc(1280px - 846.72px - 376.72px);
   width: 100%;
@@ -13,7 +13,7 @@
 }
 
 @media (max-width: 584px) {
-  .form__close {
+  .popup__close {
     max-width: calc(320px - 264.62px - 18.62px);
     height: calc(320px - 264.62px - 18.62px);
     right: 0;
@@ -21,6 +21,6 @@
   }
 }
 
-.form__close:hover {
+.popup__close:hover {
   opacity: 60%;
 }
