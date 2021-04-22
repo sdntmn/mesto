@@ -1,4 +1,4 @@
-.popup__specialization {
+.popup__job {
   margin: 0;
   height: 14px;
   border: none;
@@ -10,10 +10,11 @@
   font-size: 14px;
   line-height: 17px;
   color: rgba(0, 0, 0, 1);
+  outline: none;
 }
 
 @media (max-width: 320px) {
-  .popup__specialization {
+  .popup__job {
     padding-bottom: 8px;
   }
 }

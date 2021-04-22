@@ -1,6 +1,6 @@
-.popup__form {
+.popup__container {
   position: absolute;
-  display: flex; /* flex*/
+  display: flex;
   flex-direction: column;
   padding: 34px 36px 37px;
   max-width: 430px;
@@ -13,7 +13,7 @@
 }
 
 @media (max-width: 880px) {
-  .popup__form {
+  .popup__container {
     max-width: 282px;
     height: 322px;
     padding: 25px 22px;
