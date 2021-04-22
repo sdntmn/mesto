@@ -2,6 +2,7 @@
   position: absolute;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   padding: 34px 36px 37px;
   max-width: 430px;
   width: 100%;
