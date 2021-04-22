@@ -9,23 +9,39 @@
   </head>
   <body class="root">
     <div class="page">
-      <header class="header page__cover" aria-label="Logo">
-        <hr class="header__line" />
+      <header class="header page__cover">
+        <img class="logo" src="./images/Vector.svg" alt="Логотип сайта" />
       </header>
-      <section class="profilles">
-        <ul class="profille page__cover">
-          <li class="profille__card">
+      <section class="profilles page__cover">
+        <ul class="profille">
+          <li class="profille__info">
             <img
-              class="profille__img"
+              class="profille__avatar"
               src="./images/image.jpg"
               alt="Фото пользователя"
             />
-            <p class="profille__name">Жак-Ив Кусто</p>
-            <h1 class="profille__specialization">Исследователь океана</h1>
-            <div class="profille__button-add"></div>
+            <div class="profille__data">
+              <div class="profille__name">
+                <span>Жак-Ив Кусто</span>
+                <a href="#" class="profille__name-change"></a>
+              </div>
+
+              <h1 class="profille__specialization">Исследователь океана</h1>
+            </div>
+            <a href="#" class="profille__button"></a>
           </li>
         </ul>
       </section>
+
+      <form class="popup" type="checkbox" disabled>
+        <div class="popup__container">
+          <a href="#" class="popup__close" type="button"></a>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input type="text" name="" id="" value="" class="popup__name" />
+          <input type="text" name="" id="" value="" class="popup__job" />
+          <button type="submit" class="popup__button">Сохранить</button>
+        </div>
+      </form>
 
       <main class="content page__cover">
         <section>
@@ -36,8 +52,10 @@
                 src="./images/kirill-pershin-1088404-unsplash.jpg"
                 alt=""
               />
-              <h2 class="element__name-mesto">Карачаевск</h2>
-              <div class="element__like"></div>
+              <div class="element__title">
+                <h2 class="element__name-mesto">Карачаевск</h2>
+                <div class="element__like"></div>
+              </div>
             </li>
             <li class="element">
               <img
@@ -45,8 +63,10 @@
                 src="./images/kirill-pershin-1404681-unsplash.jpg"
                 alt=""
               />
-              <h2 class="element__name-mesto">Гора Эльбрус</h2>
-              <div class="element__like"></div>
+              <div class="element__title">
+                <h2 class="element__name-mesto">Гора Эльбрус</h2>
+                <div class="element__like"></div>
+              </div>
             </li>
             <li class="element">
               <img
@@ -54,8 +74,10 @@
                 src="./images/kirill-pershin-1556355-unsplash.jpg"
                 alt=""
               />
-              <h2 class="element__name-mesto">Домбай</h2>
-              <div class="element__like"></div>
+              <div class="element__title">
+                <h2 class="element__name-mesto">Домбай</h2>
+                <div class="element__like"></div>
+              </div>
             </li>
             <li class="element">
               <img
@@ -63,8 +85,10 @@
                 src="./images/kirill-pershin-1404681-unsplash.jpg"
                 alt=""
               />
-              <h2 class="element__name-mesto">Гора Эльбрус</h2>
-              <div class="element__like"></div>
+              <div class="element__title">
+                <h2 class="element__name-mesto">Гора Эльбрус</h2>
+                <div class="element__like"></div>
+              </div>
             </li>
             <li class="element">
               <img
@@ -72,8 +96,10 @@
                 src="./images/kirill-pershin-1556355-unsplash.jpg"
                 alt=""
               />
-              <h2 class="element__name-mesto">Домбай</h2>
-              <div class="element__like"></div>
+              <div class="element__title">
+                <h2 class="element__name-mesto">Домбай</h2>
+                <div class="element__like"></div>
+              </div>
             </li>
             <li class="element">
               <img
@@ -81,15 +107,18 @@
                 src="./images/kirill-pershin-1088404-unsplash.jpg"
                 alt=""
               />
-              <h2 class="element__name-mesto">Карачаево-Черкесия</h2>
-              <div class="element__like"></div>
+              <div class="element__title">
+                <h2 class="element__name-mesto">Карачаево-Черкесия</h2>
+                <div class="element__like"></div>
+              </div>
             </li>
           </ul>
         </section>
       </main>
       <footer class="footer page__cover">
-        <span class="footer__text">© 2020 Mesto Russia</span>
+        <span class="footer__text">&copy; 2020 Mesto Russia</span>
       </footer>
     </div>
+    <script src="./scripts/index.js" defer></script>
   </body>
 </html>

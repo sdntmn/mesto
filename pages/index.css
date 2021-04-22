@@ -1,0 +1,49 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts/inter.css);
+
+/* Стили для всей страницы */
+@import url(../blocks/root/root.css);
+@import url(../blocks/page/page.css);
+
+/* Повторяющиеся блоки */
+@import url(../blocks/page/__cover/page__cover.css);
+
+/* Шапка сайта */
+/* Блок /header/ */
+@import url(../blocks/header/header.css);
+@import url(../blocks/logo/logo.css);
+
+/* Section "profilles" */
+@import url(../blocks/profilles/profilles.css);
+@import url(../blocks/profille/profille.css);
+@import url(../blocks/profille/__info/profille__info.css);
+@import url(../blocks/profille/__avatar/profille__avatar.css);
+@import url(../blocks/profille/__data/profille__data.css);
+@import url(../blocks/profille/__name/profille__name.css);
+@import url(../blocks/profille/__name-change/profille__name-change.css);
+@import url(../blocks/profille/__img/proffille__img.css);
+@import url(../blocks/profille/__specialization/profille__specialization.css);
+@import url(../blocks/profille/__button/profille__button.css);
+
+/* Блок Popup */
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_is-opened/popup_is-opened.css);
+@import url(../blocks/popup/__button/popup__button.css);
+@import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__name/popup__name.css);
+@import url(../blocks/popup/__job/popup__job.css);
+@import url(../blocks/popup/__title/popup__title.css);
+
+/* Блок Main  */
+@import url(../blocks/content/content.css);
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__img/element__img.css);
+@import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/element/__name-mesto/element__name-mesto.css);
+@import url(../blocks/element/__like/element__like.css);
+
+/* Блок Footer  */
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__text/footer__text.css);
