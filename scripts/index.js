@@ -18,8 +18,8 @@ function handleOverlayClick(event) {
 popup.addEventListener("click", handleOverlayClick);
 
 let formElement = document.querySelector(".profille");
-let nameInput = popup.querySelector(".popup__name");
-let jobInput = popup.querySelector(".popup__job");
+let nameInput = popup.querySelector(".popup__input_value_name");
+let jobInput = popup.querySelector(".popup__input_value_job");
 const savePopupButton = popup.querySelector(".popup__button");
 
 function formSubmitHandler(evt) {
