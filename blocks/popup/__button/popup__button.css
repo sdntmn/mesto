@@ -11,7 +11,7 @@
   color: rgba(255, 255, 255, 1);
 }
 
-@media (max-width: 320px) {
+@media (max-width: 880px) {
   .popup__button {
     height: 46px;
     font-size: 14px;

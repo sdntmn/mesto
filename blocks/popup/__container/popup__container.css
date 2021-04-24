@@ -1,4 +1,6 @@
 .popup__container {
+  margin: 0;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

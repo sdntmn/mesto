@@ -1,17 +1,19 @@
-.profille__specialization {
+.profile__specialization {
   margin: 0;
-  height: 18px;
+  max-width: 336px;
   color: rgba(255, 255, 255, 1);
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (max-width: 584px) {
-  .profille__specialization {
+  .profile__specialization {
     max-width: 282px;
-    height: 14px;
     font-size: 14px;
     line-height: 17px;
   }

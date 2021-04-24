@@ -1,0 +1,10 @@
+.popup__date {
+  margin: 0;
+  padding-top: 48px;
+}
+
+@media (max-width: 880px) {
+  .popup__date {
+    padding-top: 75px;
+  }
+}

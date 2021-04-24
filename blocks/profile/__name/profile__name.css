@@ -1,13 +1,10 @@
-.profille__name {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.profile__name {
+  display: grid;
+  grid-template-columns: 120px 1fr;
   align-items: center;
+  gap: 30px;
   margin: 0;
   color: rgba(255, 255, 255, 1);
-  max-height: 39px;
-  height: 100%;
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
@@ -15,10 +12,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  border: 1px solid #ccc;
 }
 
 @media (max-width: 880px) {
-  .profille__name {
+  .profile__name {
     font-size: 27px;
     line-height: 33px;
     max-height: 26px;
@@ -26,10 +24,7 @@
 }
 
 @media (max-width: 584px) {
-  .profille__name {
-    font-size: 27px;
-    line-height: 33px;
+  .profile__name {
     justify-content: center;
-    max-height: 26px;
   }
 }
