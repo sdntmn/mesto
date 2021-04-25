@@ -1,13 +1,10 @@
 .profile {
   padding: 40px 0 0;
   margin: 0;
-  max-height: 120px;
-  list-style: none;
 }
 
 @media (max-width: 584px) {
   .profile {
-    max-height: 286px;
     padding: 42px 0 0;
   }
 }
