@@ -1,7 +1,6 @@
 .profile__item-info {
-  display: inline-block;
+  max-width: 336px;
   width: 100%;
-  margin: 0;
   color: rgba(255, 255, 255, 1);
   font-style: normal;
   font-weight: 500;
@@ -10,10 +9,12 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin-top: 20px;
 }
 
 @media (max-width: 880px) {
   .profile__item-info {
+    max-width: 282px;
     font-size: 27px;
     line-height: 33px;
   }

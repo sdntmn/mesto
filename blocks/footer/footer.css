@@ -2,6 +2,7 @@
   margin: 0 auto;
   height: 100%;
   padding: 66px 0 60px;
+  flex-shrink: 0;
 }
 @media (max-width: 584px) {
   .footer {
