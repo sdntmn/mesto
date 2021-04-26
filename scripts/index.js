@@ -10,14 +10,14 @@ let newJob = formElement.querySelector(".profile__specialization");
 let newName = formElement.querySelector(".profile__item-info");
 
 function openPopup() {
-  popup.classList.toggle("popup_opened");
+  popup.classList.toggle("popup_is-opened");
   nameInput.value = newName.textContent;
   jobInput.value = newJob.textContent;
 }
 openPopupButton.addEventListener("click", openPopup);
 
 function closePopup() {
-  popup.classList.toggle("popup_opened");
+  popup.classList.toggle("popup_is-opened");
 }
 closePopupButton.addEventListener("click", closePopup);
 
