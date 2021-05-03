@@ -4,7 +4,7 @@
   height: 100%;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 584px) {
   .logo {
     max-height: 24.4px;
     padding-left: 8px;

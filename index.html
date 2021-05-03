@@ -12,112 +12,128 @@
       <header class="header page__cover">
         <img class="logo" src="./images/Vector.svg" alt="Логотип сайта" />
       </header>
-      <section class="profilles page__cover">
-        <ul class="profille">
-          <li class="profille__info">
-            <img
-              class="profille__avatar"
-              src="./images/image.jpg"
-              alt="Фото пользователя"
-            />
-            <div class="profille__data">
-              <div class="profille__name">
-                <span>Жак-Ив Кусто</span>
-                <a href="#" class="profille__name-change"></a>
-              </div>
-
-              <h1 class="profille__specialization">Исследователь океана</h1>
-            </div>
-            <a href="#" class="profille__button"></a>
-          </li>
-        </ul>
-      </section>
-
-      <form class="popup" type="checkbox" disabled>
-        <div class="popup__container">
-          <a href="#" class="popup__close" type="button"></a>
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <input type="text" name="" id="" value="" class="popup__name" />
-          <input type="text" name="" id="" value="" class="popup__job" />
-          <button type="submit" class="popup__button">Сохранить</button>
-        </div>
-      </form>
 
       <main class="content page__cover">
+        <section class="profiles page__cover">
+          <div class="profile">
+            <div class="profile__info">
+              <div class="profile__data">
+                <img
+                  class="profile__avatar"
+                  src="./images/image.jpg"
+                  alt="Фото пользователя"
+                />
+                <div class="profile__item">
+                  <div class="profile__item-name">
+                    <h1 class="profile__item-info">Жак-Ив Кусто</h1>
+                    <button
+                      class="profile__opened"
+                      type="button"
+                      aria-label="Редактировать"
+                    ></button>
+                  </div>
+                  <p class="profile__specialization">Исследователь океана</p>
+                </div>
+              </div>
+              <button
+                class="profile__button"
+                type="button"
+                aria-label="Добавить"
+              ></button>
+            </div>
+          </div>
+        </section>
+
+        <template id="template-element">
+          <li class="element">
+            <img language="javascript" class="element__img" src="" alt="" />
+            <div class="element__title">
+              <h2 class="element__name-mesto"></h2>
+              <button
+                class="element__like"
+                type="button"
+                aria-label="Поставить лайк"
+              ></button>
+            </div>
+          </li>
+        </template>
+
         <section>
-          <ul class="elements">
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1088404-unsplash.jpg"
-                alt=""
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Карачаевск</h2>
-                <div class="element__like"></div>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1404681-unsplash.jpg"
-                alt=""
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Гора Эльбрус</h2>
-                <div class="element__like"></div>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1556355-unsplash.jpg"
-                alt=""
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Домбай</h2>
-                <div class="element__like"></div>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1404681-unsplash.jpg"
-                alt=""
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Гора Эльбрус</h2>
-                <div class="element__like"></div>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1556355-unsplash.jpg"
-                alt=""
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Домбай</h2>
-                <div class="element__like"></div>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1088404-unsplash.jpg"
-                alt=""
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Карачаево-Черкесия</h2>
-                <div class="element__like"></div>
-              </div>
-            </li>
-          </ul>
+          <ul class="elements"></ul>
         </section>
       </main>
+
       <footer class="footer page__cover">
-        <span class="footer__text">&copy; 2020 Mesto Russia</span>
+        <p class="footer__text">&copy; 2020 Mesto Russia</p>
       </footer>
+
+      <div class="popup" id="popup_form_profile">
+        <button
+          class="popup__close"
+          type="button"
+          aria-label="Кнопка закрытия формы"
+        ></button>
+        <div class="popup__container">
+          <form name="form">
+            <fieldset class="popup__data">
+              <legend class="popup__title">Редактировать профиль</legend>
+              <input
+                class="popup__input popup__input_value_name"
+                required
+                placeholder="Введите ФИО"
+                type="text"
+                name="name"
+                value=""
+              />
+              <input
+                class="popup__input popup__input_value_job"
+                required
+                placeholder="Введите специализацию"
+                type="text"
+                name="job"
+                value=""
+              />
+            </fieldset>
+            <button type="submit" class="popup__button" aria-label="Сохранить">
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="popup" id="popup_form_mesto">
+        <button
+          class="popup__close"
+          type="button"
+          aria-label="Кнопка закрытия формы"
+        ></button>
+        <div class="popup__container">
+          <form name="form">
+            <fieldset class="popup__data">
+              <legend class="popup__title">Новое место</legend>
+              <input
+                class="popup__input popup__input_value_mesto"
+                required
+                placeholder="Название"
+                type="text"
+                name="name"
+                value=""
+              />
+              <input
+                class="popup__input popup__input_value_link"
+                required
+                placeholder="Ссылка на картинку"
+                type="text"
+                name="job"
+                value=""
+              />
+            </fieldset>
+            <button type="submit" class="popup__button" aria-label="Создать">
+              Создать
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
     <script src="./scripts/index.js" defer></script>
   </body>

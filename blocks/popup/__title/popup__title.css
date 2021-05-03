@@ -1,9 +1,6 @@
 .popup__title {
   margin: 0;
-  position: relative;
-  max-height: 23px;
-  padding: 0;
-  padding-bottom: 54px;
+  padding: 0 0 16px;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -11,13 +8,12 @@
   color: rgba(0, 0, 0, 1);
 }
 
-@media (max-width: 584px) {
+@media (max-width: 880px) {
   .popup__title {
+    padding: 0 0 42px;
     font-size: 18px;
     line-height: 22px;
     max-width: 238px;
     width: 100%;
-    white-space: nowrap;
-    padding-bottom: 75px;
   }
 }
