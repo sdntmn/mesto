@@ -46,6 +46,11 @@
 
         <template id="template-element">
           <li class="element">
+            <button
+              class="element__trash"
+              type="button"
+              aria-label="Удалить"
+            ></button>
             <img language="javascript" class="element__img" src="" alt="" />
             <div class="element__title">
               <h2 class="element__name-mesto"></h2>
@@ -68,13 +73,14 @@
       </footer>
 
       <div class="popup" id="popup_form_profile">
-        <button
-          class="popup__close"
-          type="button"
-          aria-label="Кнопка закрытия формы"
-        ></button>
         <div class="popup__container">
           <form name="form">
+            <button
+              class="popup__close"
+              type="button"
+              aria-label="Кнопка закрытия формы"
+            >
+            </button>
             <fieldset class="popup__data">
               <legend class="popup__title">Редактировать профиль</legend>
               <input
@@ -102,13 +108,14 @@
       </div>
 
       <div class="popup" id="popup_form_mesto">
-        <button
+        
+        <div class="popup__container">
+          <form name="form">
+            <button
           class="popup__close"
           type="button"
           aria-label="Кнопка закрытия формы"
         ></button>
-        <div class="popup__container">
-          <form name="form">
             <fieldset class="popup__data">
               <legend class="popup__title">Новое место</legend>
               <input
@@ -124,7 +131,7 @@
                 required
                 placeholder="Ссылка на картинку"
                 type="text"
-                name="job"
+                name="link"
                 value=""
               />
             </fieldset>
@@ -134,6 +141,18 @@
           </form>
         </div>
       </div>
+
+      <div class="popup" id="popup_foto_mesto">      
+        <figure class="popup__foto">
+          <button
+          class="popup__close"
+          type="button"
+          aria-label="Кнопка закрытия формы"
+          ></button>
+          <img language="javascript" class="popup__img" src="" alt="" />
+          <figcaption class="popup__img-name"></figcaption>        
+      </div>
+
     </div>
     <script src="./scripts/index.js" defer></script>
   </body>
