@@ -44,99 +44,27 @@
           </div>
         </section>
 
+        <template id="template-element">
+          <li class="element">
+            <button
+              class="element__trash"
+              type="button"
+              aria-label="Удалить"
+            ></button>
+            <img language="javascript" class="element__img" src="" alt="" />
+            <div class="element__title">
+              <h2 class="element__name-mesto"></h2>
+              <button
+                class="element__like"
+                type="button"
+                aria-label="Поставить лайк"
+              ></button>
+            </div>
+          </li>
+        </template>
+
         <section>
-          <ul class="elements">
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1088404-unsplash.jpg"
-                alt="Фото. Каратчаевск "
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Карачаевск</h2>
-                <button
-                  class="element__like"
-                  type="button" 
-                  aria-label="Поставить лайк"
-                ></button>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1404681-unsplash.jpg"
-                alt="Фото. Гора Эльбрус "
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Гора Эльбрус</h2>
-                <button
-                  class="element__like"
-                  type="button" 
-                  aria-label="Поставить лайк"
-                ></button>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1556355-unsplash.jpg"
-                alt="Фото. Домбай"
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Домбай</h2>
-                <button
-                  class="element__like"
-                  type="button" 
-                  aria-label="Поставить лайк"
-                ></button>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1404681-unsplash.jpg"
-                alt="Фото. Гора Эльбрус "
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Гора Эльбрус</h2>
-                <button
-                  class="element__like"
-                  type="button" 
-                  aria-label="Поставить лайк"
-                ></button>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1556355-unsplash.jpg"
-                alt="Фото. Домбай"
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Домбай</h2>
-                <button
-                  class="element__like"
-                  type="button" 
-                  aria-label="Поставить лайк"
-                ></button>
-              </div>
-            </li>
-            <li class="element">
-              <img
-                class="element__img"
-                src="./images/kirill-pershin-1088404-unsplash.jpg"
-                alt="Фото. Карачаево-Черкесия"
-              />
-              <div class="element__title">
-                <h2 class="element__name-mesto">Карачаево-Черкесия</h2>
-                <button
-                  class="element__like"
-                  type="button" 
-                  aria-label="Поставить лайк"
-                ></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="elements"></ul>
         </section>
       </main>
 
@@ -144,14 +72,15 @@
         <p class="footer__text">&copy; 2020 Mesto Russia</p>
       </footer>
 
-      <div class="popup">
-        <button
-          class="popup__close"
-          type="button"
-          aria-label="Кнопка закрытия формы"
-        ></button>
+      <div class="popup" id="popup_form_profile">
         <div class="popup__container">
           <form name="form">
+            <button
+              class="popup__close"
+              type="button"
+              aria-label="Кнопка закрытия формы"
+            >
+            </button>
             <fieldset class="popup__data">
               <legend class="popup__title">Редактировать профиль</legend>
               <input
@@ -177,6 +106,55 @@
           </form>
         </div>
       </div>
+
+      <div class="popup" id="popup_form_mesto">
+        
+        <div class="popup__container">
+          <form name="form">
+            <button
+          class="popup__close"
+          type="button"
+          aria-label="Кнопка закрытия формы"
+        ></button>
+            <fieldset class="popup__data">
+              <legend class="popup__title">Новое место</legend>
+              <input
+                class="popup__input popup__input_value_mesto"
+                required
+                placeholder="Название"
+                type="text"
+                name="name"
+                value=""
+              />
+              <input
+                class="popup__input popup__input_value_link"
+                required
+                placeholder="Ссылка на картинку"
+                type="text"
+                name="link"
+                value=""
+              />
+            </fieldset>
+            <button type="submit" class="popup__button" aria-label="Создать">
+              Создать
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="popup" id="popup_foto_mesto"> 
+        <div class="popup__container-foto">    
+        <figure class="popup__foto">
+          <button
+          class="popup__close"
+          type="button"
+          aria-label="Кнопка закрытия формы"
+          ></button>
+          <img language="javascript" class="popup__img" src="" alt="" />
+          <figcaption class="popup__img-name"></figcaption>   
+          </div>      
+      </div>
+
     </div>
     <script src="./scripts/index.js" defer></script>
   </body>

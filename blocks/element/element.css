@@ -1,7 +1,8 @@
 .element {
+  position: relative;
   list-style: none;
   display: grid;
-  grid-template-rows: repeat(2, auto);
+  grid-template-rows: 282px 80px;
   background: rgba(255, 255, 255, 1);
   border-radius: 10px;
   box-sizing: border-box;
