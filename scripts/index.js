@@ -87,6 +87,8 @@ openPopupBtnProfile.addEventListener("click", function () {
 /* Открытие popupInputMesto */
 openPopupBtnMesto.addEventListener("click", function () {
   openPopup(popupMesto);
+  inputMesto.value = "";
+  inputLink.value = "";
 });
 
 /* Функция закрытия попапов */
