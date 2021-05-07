@@ -1,4 +1,4 @@
-let formElement = document.querySelector(".profile");
+const formElement = document.querySelector(".profile");
 
 const openPopupBtnProfile = formElement.querySelector(".profile__opened");
 const openPopupBtnMesto = formElement.querySelector(".profile__button");
