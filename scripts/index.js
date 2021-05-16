@@ -26,6 +26,15 @@ let newName = formElement.querySelector(".profile__item-info");
 
 const elementTemplate = document.querySelector("#template-element");
 
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+});
+
 /* Работа с карточками */
 function createCard(linkFoto, nameMesto) {
   const cardElement = elementTemplate.content.cloneNode(true);
@@ -135,3 +144,10 @@ function handleOverlayClickMesto(evt) {
   }
 }
 popupMesto.addEventListener("click", handleOverlayClickMesto);
+
+function handleOverlayClickFoto(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(popupFoto);
+  }
+}
+popupFoto.addEventListener("click", handleOverlayClickFoto);
