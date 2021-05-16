@@ -144,3 +144,10 @@ function handleOverlayClickMesto(evt) {
   }
 }
 popupMesto.addEventListener("click", handleOverlayClickMesto);
+
+function handleOverlayClickFoto(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(popupFoto);
+  }
+}
+popupFoto.addEventListener("click", handleOverlayClickFoto);
