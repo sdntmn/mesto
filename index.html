@@ -74,7 +74,7 @@
 
       <div class="popup" id="popup_form_profile">
         <div class="popup__container">
-          <form name="form">
+          <form class="popup__form" id="form" name="formProfile" novalidate>
             <button
               class="popup__close"
               type="button"
@@ -84,20 +84,26 @@
               <legend class="popup__title">Редактировать профиль</legend>
               <input
                 class="popup__input popup__input_value_name"
-                required
+                id="snp-input"
+                minlength="2"
+                maxlength="40"
                 placeholder="Введите ФИО"
                 type="text"
-                name="name"
-                value=""
+                name="snp"
+                required
               />
+              <span class="popup__input-error snp-input-error"></span>
               <input
                 class="popup__input popup__input_value_job"
-                required
+                id="job-input"
+                minlength="2"
+                maxlength="200"
                 placeholder="Введите специализацию"
                 type="text"
                 name="job"
-                value=""
+                required
               />
+              <span class="popup__input-error job-input-error"></span>
             </fieldset>
             <button type="submit" class="popup__button" aria-label="Сохранить">
               Сохранить
@@ -108,7 +114,7 @@
 
       <div class="popup" id="popup_form_mesto">
         <div class="popup__container">
-          <form name="form">
+          <form class="popup__form" id="form" name="formMesto" novalidate>
             <button
               class="popup__close"
               type="button"
@@ -118,20 +124,24 @@
               <legend class="popup__title">Новое место</legend>
               <input
                 class="popup__input popup__input_value_mesto"
-                required
+                id="name-input"
+                minlength="2"
+                maxlength="30"
                 placeholder="Название"
                 type="text"
                 name="name"
-                value=""
+                required
               />
+              <span class="popup__input-error name-input-error"></span>
               <input
                 class="popup__input popup__input_value_link"
-                required
+                id="link-input"
                 placeholder="Ссылка на картинку"
-                type="text"
+                type="url"
                 name="link"
-                value=""
+                required
               />
+              <span class="popup__input-error link-input-error"></span>
             </fieldset>
             <button type="submit" class="popup__button" aria-label="Создать">
               Создать
@@ -154,7 +164,9 @@
         </div>
       </div>
     </div>
+
     <script src="./scripts/initial-cards.js" defer></script>
+    <script src="./scripts/validate.js" defer></script>
     <script src="./scripts/index.js" defer></script>
   </body>
 </html>
