@@ -129,25 +129,17 @@ function formSubmitHandlerProfile(evt) {
 }
 popupProfile.addEventListener("submit", formSubmitHandlerProfile);
 
-/* Закрытие popupProfile по полю в не окна попап */
-function handleOverlayClickProfile(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popupProfile);
-  }
-}
-popupProfile.addEventListener("click", handleOverlayClickProfile);
+const listenersClosePopup = Array.from(document.querySelectorAll(".popup"));
+listenersClosePopup.forEach((popup) => {
+  popup.addEventListener("click", (evt) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup);
+    }
+  });
 
-/* Закрытие popupMesto по полю в не окна попап */
-function handleOverlayClickMesto(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popupMesto);
-  }
-}
-popupMesto.addEventListener("click", handleOverlayClickMesto);
-
-function handleOverlayClickFoto(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popupFoto);
-  }
-}
-popupFoto.addEventListener("click", handleOverlayClickFoto);
+  document.addEventListener("keydown", function (evt) {
+    if (evt.key == "Escape") {
+      closePopup(popup);
+    }
+  });
+});
