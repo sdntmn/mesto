@@ -60,6 +60,7 @@ function createCard(linkFoto, nameMesto) {
   elementImg.addEventListener("click", function () {
     openPopup(popupFoto);
     popupImg.src = elementImg.src;
+    popupImg.alt = elementImg.alt;
     popupImgName.textContent = elementNameMesto.textContent;
   });
 
