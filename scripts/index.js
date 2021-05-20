@@ -19,10 +19,10 @@ const listMesto = document.querySelector(".elements");
 const inputMesto = popupMesto.querySelector(".popup__input_value_mesto");
 const inputLink = popupMesto.querySelector(".popup__input_value_link");
 
-let nameInput = popupProfile.querySelector(".popup__input_value_name");
-let jobInput = popupProfile.querySelector(".popup__input_value_job");
-let newJob = formElement.querySelector(".profile__specialization");
-let newName = formElement.querySelector(".profile__item-info");
+const nameInput = popupProfile.querySelector(".popup__input_value_name");
+const jobInput = popupProfile.querySelector(".popup__input_value_job");
+const newJob = formElement.querySelector(".profile__specialization");
+const newName = formElement.querySelector(".profile__item-info");
 
 const elementTemplate = document.querySelector("#template-element");
 
@@ -30,9 +30,9 @@ enableValidation({
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
+  inactiveButtonClass: ".popup__button_disabled",
   inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
+  errorClass: "popup__input-error",
 });
 
 /* Работа с карточками */
@@ -63,21 +63,22 @@ function createCard(linkFoto, nameMesto) {
     popupImg.alt = elementImg.alt;
     popupImgName.textContent = elementNameMesto.textContent;
   });
-
   return cardElement;
 }
 
 /* Первоначальный вывод карточек из массива*/
 initialCards.forEach(function (element) {
   const newCard = createCard(element.link, element.name);
-
   listMesto.prepend(newCard);
 });
 
 /* Добавление новых карточек */
 saveBtnMesto.addEventListener("click", function (evt) {
   evt.preventDefault();
+
   const cardValue = createCard(inputLink.value, inputMesto.value);
+
+  saveBtnMesto.disabled = true;
   listMesto.prepend(cardValue);
   closePopup(popupMesto);
 });
@@ -85,6 +86,7 @@ saveBtnMesto.addEventListener("click", function (evt) {
 /* Функция открытия попапов */
 function openPopup(popup) {
   popup.classList.add("popup_is-opened");
+  document.addEventListener("keydown", closeByEscape); // навесили слушателя
 }
 
 /* Открытие popupProfile */
@@ -95,31 +97,17 @@ openPopupBtnProfile.addEventListener("click", function () {
 });
 
 /* Открытие popupInputMesto */
+const form = document.forms.formMesto;
 openPopupBtnMesto.addEventListener("click", function () {
+  form.reset();
   openPopup(popupMesto);
-  inputMesto.value = "";
-  inputLink.value = "";
 });
 
 /* Функция закрытия попапов */
 function closePopup(popup) {
   popup.classList.remove("popup_is-opened");
+  document.removeEventListener("keydown", closeByEscape); // удалили слушателя
 }
-
-/* Закрытие popupProfile */
-closePopupBtnProfile.addEventListener("click", function () {
-  closePopup(popupProfile);
-});
-
-/* Закрытие popupInputMesto */
-closePopupBtnMesto.addEventListener("click", function () {
-  closePopup(popupMesto);
-});
-
-/* Закрытие попап FotoMesto*/
-closePopupBtnFoto.addEventListener("click", function () {
-  closePopup(popupFoto);
-});
 
 /* Ввод данных и закрытие popupProfile по кнопке сохранить */
 function formSubmitHandlerProfile(evt) {
@@ -130,17 +118,23 @@ function formSubmitHandlerProfile(evt) {
 }
 popupProfile.addEventListener("submit", formSubmitHandlerProfile);
 
-const listenersClosePopup = Array.from(document.querySelectorAll(".popup"));
-listenersClosePopup.forEach((popup) => {
+/* Слушатель закрытия popups кликом мыши по полю и по кнопке закрытия popup  */
+const listenersClosePopups = Array.from(document.querySelectorAll(".popup"));
+listenersClosePopups.forEach((popup) => {
   popup.addEventListener("click", (evt) => {
     if (evt.target === evt.currentTarget) {
       closePopup(popup);
     }
-  });
-
-  document.addEventListener("keydown", function (evt) {
-    if (evt.key == "Escape") {
+    if (evt.target.classList.contains("popup__close")) {
       closePopup(popup);
     }
   });
 });
+
+/* Функция закрытия по кнопке Esc*/
+function closeByEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_is-opened");
+    closePopup(openedPopup);
+  }
+}
