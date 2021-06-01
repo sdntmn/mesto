@@ -1,5 +1,6 @@
 .popup__container {
-  margin: 0;
+  margin-left: calc((100vw - 430px) / 2);
+  margin-top: calc((100vh - 330px) / 2);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -17,5 +18,7 @@
   .popup__container {
     max-width: 282px;
     padding: 25px 22px;
+    margin-top: calc((100vh - 322px) / 2);
+    margin-left: calc((100vw - 300px) / 2);
   }
 }

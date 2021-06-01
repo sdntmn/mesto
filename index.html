@@ -46,7 +46,12 @@
 
         <template id="template-element">
           <li class="element">
-            <img language="javascript" class="element__img" src="" alt="" />
+            <button
+              class="element__trash"
+              type="button"
+              aria-label="Удалить"
+            ></button>
+            <img class="element__img" />
             <div class="element__title">
               <h2 class="element__name-mesto"></h2>
               <button
@@ -68,31 +73,42 @@
       </footer>
 
       <div class="popup" id="popup_form_profile">
-        <button
-          class="popup__close"
-          type="button"
-          aria-label="Кнопка закрытия формы"
-        ></button>
         <div class="popup__container">
-          <form name="form">
+          <form
+            class="popup__form"
+            id="form_profile"
+            name="formProfile"
+            novalidate
+          >
+            <button
+              class="popup__close"
+              type="button"
+              aria-label="Кнопка закрытия формы"
+            ></button>
             <fieldset class="popup__data">
               <legend class="popup__title">Редактировать профиль</legend>
               <input
                 class="popup__input popup__input_value_name"
-                required
+                id="snp-input"
+                minlength="2"
+                maxlength="40"
                 placeholder="Введите ФИО"
                 type="text"
-                name="name"
-                value=""
+                name="snp"
+                required
               />
+              <span class="popup__input-error snp-input-error"></span>
               <input
                 class="popup__input popup__input_value_job"
-                required
+                id="job-input"
+                minlength="2"
+                maxlength="200"
                 placeholder="Введите специализацию"
                 type="text"
                 name="job"
-                value=""
+                required
               />
+              <span class="popup__input-error job-input-error"></span>
             </fieldset>
             <button type="submit" class="popup__button" aria-label="Сохранить">
               Сохранить
@@ -102,39 +118,69 @@
       </div>
 
       <div class="popup" id="popup_form_mesto">
-        <button
-          class="popup__close"
-          type="button"
-          aria-label="Кнопка закрытия формы"
-        ></button>
         <div class="popup__container">
-          <form name="form">
+          <form class="popup__form" id="form_mesto" name="formMesto" novalidate>
+            <button
+              class="popup__close"
+              type="button"
+              aria-label="Кнопка закрытия формы"
+            ></button>
             <fieldset class="popup__data">
               <legend class="popup__title">Новое место</legend>
               <input
                 class="popup__input popup__input_value_mesto"
-                required
+                id="name-input"
+                minlength="2"
+                maxlength="30"
                 placeholder="Название"
                 type="text"
                 name="name"
-                value=""
+                required
               />
+              <span class="popup__input-error name-input-error"></span>
               <input
                 class="popup__input popup__input_value_link"
-                required
+                id="link-input"
                 placeholder="Ссылка на картинку"
-                type="text"
-                name="job"
-                value=""
+                type="url"
+                name="link"
+                required
               />
+              <span class="popup__input-error link-input-error"></span>
             </fieldset>
-            <button type="submit" class="popup__button" aria-label="Создать">
+            <button
+              type="submit"
+              class="popup__button"
+              aria-label="Создать"
+              disabled
+            >
               Создать
             </button>
           </form>
         </div>
       </div>
+
+      <div class="popup" id="popup_foto_mesto">
+        <div class="popup__container-foto">
+          <figure class="popup__foto">
+            <button
+              class="popup__close"
+              type="button"
+              aria-label="Кнопка закрытия формы"
+            ></button>
+            <img
+              class="popup__img"
+              src="./images/Горный Алтай.jpg"
+              alt="Фото"
+            />
+            <figcaption class="popup__img-name"></figcaption>
+          </figure>
+        </div>
+      </div>
     </div>
+
+    <script src="./scripts/initial-cards.js" defer></script>
+    <script src="./scripts/validate.js" defer></script>
     <script src="./scripts/index.js" defer></script>
   </body>
 </html>
