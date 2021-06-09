@@ -1,13 +1,5 @@
 import { Card } from "./card.js";
-import {
-  hideInputError,
-  showInputError,
-  checkInputValidity,
-  hasInvalidInput,
-  toggleButtonState,
-  setEventListeners,
-  enableValidation,
-} from "./formValidator.js";
+import { FormValidate } from "./formValidator.js";
 
 const initialCards = [
   {
@@ -54,14 +46,14 @@ const jobInput = popupProfile.querySelector(".popup__input_value_job");
 const newJob = formElement.querySelector(".profile__specialization");
 const newName = formElement.querySelector(".profile__item-info");
 
-enableValidation({
+const config = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
-  inactiveButtonClass: ".popup__button_disabled",
+  inactiveButtonClass: ".popup__button:disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error",
-});
+};
 
 initialCards.forEach((item) => {
   const card = new Card(item);
@@ -77,9 +69,11 @@ saveBtnMesto.addEventListener("click", function (evt) {
     name: inputMesto.value,
     link: inputLink.value,
   };
+
   const card = new Card(data);
   const cardElement = card.generateCard();
 
+  /*const valid = new FormValidator(config, ".popup__form");*/
   document.querySelector(".elements").prepend(cardElement);
 
   closePopup(popupMesto);
@@ -142,3 +136,8 @@ function closeByEscape(evt) {
     closePopup(openedPopup);
   }
 }
+const validMesto = new FormValidate(config, "#form_mesto");
+const validProfile = new FormValidate(config, "#form_profile");
+
+validProfile.enableValidation();
+validMesto.enableValidation();
