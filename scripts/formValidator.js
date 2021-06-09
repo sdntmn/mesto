@@ -54,8 +54,6 @@ export class FormValidate {
     }
   };
 
-  //2
-
   _setEventListeners = () => {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
@@ -69,5 +67,3 @@ export class FormValidate {
     this._setEventListeners();
   }
 }
-
-/* Ещё тебя попросят метод, который сбрасывает формы и обнуляет кнопку при открытии попапа тоже в класс внести*/
