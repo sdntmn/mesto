@@ -1,50 +1,28 @@
 import { Card } from "./card.js";
 import { FormValidate } from "./formValidator.js";
+import { initialCards } from "./initial-cards.js";
 
-const initialCards = [
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-];
+const keyEscape = "Escape";
 
-const formElement = document.querySelector(".profile");
+const blockProfile = document.querySelector(".profile");
 
-const openPopupBtnProfile = formElement.querySelector(".profile__opened");
-const openPopupBtnMesto = formElement.querySelector(".profile__button");
+const btnOpenProfile = blockProfile.querySelector(".profile__opened");
+const btnOpenMesto = blockProfile.querySelector(".profile__button");
 
 const popupProfile = document.querySelector("#popup_form_profile");
 const popupMesto = document.querySelector("#popup_form_mesto");
 
-const saveBtnMesto = popupMesto.querySelector(".popup__button");
+const btnSaveMesto = popupMesto.querySelector(".popup__button");
 
 const inputMesto = popupMesto.querySelector(".popup__input_value_mesto");
 const inputLink = popupMesto.querySelector(".popup__input_value_link");
 
-const nameInput = popupProfile.querySelector(".popup__input_value_name");
-const jobInput = popupProfile.querySelector(".popup__input_value_job");
-const newJob = formElement.querySelector(".profile__specialization");
-const newName = formElement.querySelector(".profile__item-info");
+const inputName = popupProfile.querySelector(".popup__input_value_name");
+const inputJob = popupProfile.querySelector(".popup__input_value_job");
+const newJob = blockProfile.querySelector(".profile__specialization");
+const newName = blockProfile.querySelector(".profile__item-info");
+
+const containerCard = document.querySelector(".elements");
 
 const config = {
   formSelector: ".popup__form",
@@ -55,48 +33,52 @@ const config = {
   errorClass: "popup__input-error",
 };
 
-initialCards.forEach((item) => {
+function createCard(item) {
   const card = new Card(item);
   const cardElement = card.generateCard();
 
-  document.querySelector(".elements").prepend(cardElement);
+  containerCard.prepend(cardElement);
+}
+
+initialCards.forEach((item) => {
+  createCard(item);
 });
 
 /* Добавление новых карточек */
-saveBtnMesto.addEventListener("click", function (evt) {
+const creatureFormCard = document.forms.formMesto;
+
+creatureFormCard.addEventListener("submit", function (evt) {
   evt.preventDefault();
+
   const data = {
     name: inputMesto.value,
     link: inputLink.value,
   };
 
-  const card = new Card(data);
-  const cardElement = card.generateCard();
-
-  /*const valid = new FormValidator(config, ".popup__form");*/
-  document.querySelector(".elements").prepend(cardElement);
-
+  createCard(data);
   closePopup(popupMesto);
+  creatureFormCard.reset();
 });
 
 /* Функция открытия попапов */
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_is-opened");
 
   document.addEventListener("keydown", closeByEscape); // навесили слушателя
 }
 
 /* Открытие popupProfile */
-openPopupBtnProfile.addEventListener("click", function () {
+btnOpenProfile.addEventListener("click", function () {
   openPopup(popupProfile);
-  nameInput.value = newName.textContent;
-  jobInput.value = newJob.textContent;
+  inputName.value = newName.textContent;
+  inputJob.value = newJob.textContent;
 });
 
 /* Открытие popupInputMesto */
-const form = document.forms.formMesto;
-openPopupBtnMesto.addEventListener("click", function () {
-  form.reset();
+
+btnOpenMesto.addEventListener("click", function () {
+  creatureFormCard.reset();
+  btnSaveMesto.disabled = true;
   openPopup(popupMesto);
 });
 
@@ -110,8 +92,8 @@ function closePopup(popup) {
 /* Ввод данных и закрытие popupProfile по кнопке сохранить */
 function formSubmitHandlerProfile(evt) {
   evt.preventDefault();
-  newName.textContent = nameInput.value;
-  newJob.textContent = jobInput.value;
+  newName.textContent = inputName.value;
+  newJob.textContent = inputJob.value;
   closePopup(popupProfile);
 }
 popupProfile.addEventListener("submit", formSubmitHandlerProfile);
@@ -131,7 +113,7 @@ popups.forEach((popup) => {
 
 /* Функция закрытия по кнопке Esc*/
 function closeByEscape(evt) {
-  if (evt.key === "Escape") {
+  if (evt.key === keyEscape) {
     const openedPopup = document.querySelector(".popup_is-opened");
     closePopup(openedPopup);
   }

@@ -38,7 +38,6 @@ export class FormValidate {
     }
   };
 
-  //&
   _hasInvalidInput = () => {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;

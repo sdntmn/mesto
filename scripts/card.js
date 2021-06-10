@@ -1,15 +1,18 @@
+import { openPopup } from "./index.js";
+
 const popupFoto = document.querySelector("#popup_foto_mesto");
-const elementTemplate = document.querySelector("#template-element");
 const popupImg = document.querySelector(".popup__img");
 const popupImgName = document.querySelector(".popup__img-name");
 
 export class Card {
   _data;
-  constructor(data) {
+  constructor(data, openPopup) {
     this._data = data;
+    this._elementTemplate = document.querySelector("#template-element");
+    console.log(this._elementTemplate);
   }
   _getTemplate() {
-    const cardElement = elementTemplate.content
+    const cardElement = this._elementTemplate.content
       .querySelector(".element")
       .cloneNode(true);
 
@@ -18,14 +21,13 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._elementImg = this._element.querySelector(".element__img");
     this._setEventListeners();
 
-    this._element.querySelector(
-      ".element__img"
-    ).alt = `Фото. ${this._data.name}`;
+    this._elementImg.alt = `Фото. ${this._data.name}`;
     this._element.querySelector(".element__name-mesto").textContent =
       this._data.name;
-    this._element.querySelector(".element__img").src = this._data.link;
+    this._elementImg.src = this._data.link;
     return this._element;
   }
 
@@ -45,7 +47,7 @@ export class Card {
     popupImg.src = this._data.link;
     popupImg.alt = `Фото. ${this._data.name}`;
     popupImgName.textContent = this._data.name;
-    popupFoto.classList.add("popup_is-opened");
+    openPopup(popupFoto);
   }
 
   _setEventListeners() {
