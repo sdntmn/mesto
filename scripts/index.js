@@ -34,14 +34,15 @@ const config = {
 };
 
 function createCard(item) {
-  const card = new Card(item);
+  const card = new Card(item, "#template-element");
   const cardElement = card.generateCard();
 
-  containerCard.prepend(cardElement);
+  return cardElement;
 }
 
-initialCards.forEach((item) => {
-  createCard(item);
+initialCards.forEach((cardElement) => {
+  const initialCard = createCard(cardElement);
+  containerCard.prepend(initialCard);
 });
 
 /* Добавление новых карточек */
@@ -54,8 +55,9 @@ creatureFormCard.addEventListener("submit", function (evt) {
     name: inputMesto.value,
     link: inputLink.value,
   };
+  const newCard = createCard(data);
 
-  createCard(data);
+  containerCard.prepend(newCard);
   closePopup(popupMesto);
   creatureFormCard.reset();
 });

@@ -1,23 +1,21 @@
-import { openPopup } from "./index.js";
-
 const popupFoto = document.querySelector("#popup_foto_mesto");
 const popupImg = document.querySelector(".popup__img");
 const popupImgName = document.querySelector(".popup__img-name");
 
 export class Card {
   _data;
-  constructor(data, openPopup) {
+  _templateSelector;
+  constructor(data, templateSelector, openPopup) {
     this._data = data;
-    this._elementTemplate = document.querySelector("#template-element");
-    console.log(this._elementTemplate);
+    this._elementTemplate = document.querySelector(templateSelector);
   }
-  _getTemplate() {
+  _getTemplate = () => {
     const cardElement = this._elementTemplate.content
       .querySelector(".element")
       .cloneNode(true);
 
     return cardElement;
-  }
+  };
 
   generateCard() {
     this._element = this._getTemplate();
