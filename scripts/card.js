@@ -8,11 +8,9 @@ export class Card {
   _openPopup;
 
   constructor(data, templateSelector, openPopup) {
-    console.log(openPopup);
     this._data = data;
     this._elementTemplate = document.querySelector(templateSelector);
     this._openPopup = openPopup;
-    console.log(this._openPopup);
   }
 
   _getTemplate = () => {
