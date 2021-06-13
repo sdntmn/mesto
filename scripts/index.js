@@ -34,7 +34,7 @@ const config = {
 };
 
 function createCard(item) {
-  const card = new Card(item, "#template-element");
+  const card = new Card(item, "#template-element", openPopup);
   const cardElement = card.generateCard();
 
   return cardElement;
@@ -63,7 +63,7 @@ creatureFormCard.addEventListener("submit", function (evt) {
 });
 
 /* Функция открытия попапов */
-export function openPopup(popup) {
+function openPopup(popup) {
   popup.classList.add("popup_is-opened");
 
   document.addEventListener("keydown", closeByEscape); // навесили слушателя

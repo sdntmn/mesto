@@ -5,10 +5,16 @@ const popupImgName = document.querySelector(".popup__img-name");
 export class Card {
   _data;
   _templateSelector;
+  _openPopup;
+
   constructor(data, templateSelector, openPopup) {
+    console.log(openPopup);
     this._data = data;
     this._elementTemplate = document.querySelector(templateSelector);
+    this._openPopup = openPopup;
+    console.log(this._openPopup);
   }
+
   _getTemplate = () => {
     const cardElement = this._elementTemplate.content
       .querySelector(".element")
@@ -45,7 +51,7 @@ export class Card {
     popupImg.src = this._data.link;
     popupImg.alt = `Фото. ${this._data.name}`;
     popupImgName.textContent = this._data.name;
-    openPopup(popupFoto);
+    this._openPopup(popupFoto);
   }
 
   _setEventListeners() {
