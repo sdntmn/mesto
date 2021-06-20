@@ -1,6 +1,7 @@
 import { Card } from "./card.js";
 import { FormValidate } from "./formValidator.js";
 import { initialCards } from "./initial-cards.js";
+import "../pages/index.css";
 
 const keyEscape = "Escape";
 
