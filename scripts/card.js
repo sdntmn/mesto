@@ -1,23 +1,22 @@
-const popupFoto = document.querySelector("#popup_foto_mesto");
-const popupImg = document.querySelector(".popup__img");
-const popupImgName = document.querySelector(".popup__img-name");
-
 export class Card {
   _data;
   _templateSelector;
-  _openPopup;
+  _handleCardClick;
 
-  constructor(data, templateSelector, openPopup) {
+  constructor(data, templateSelector, handleCardClick) {
     this._data = data;
     this._elementTemplate = document.querySelector(templateSelector);
-    this._openPopup = openPopup;
+    this._handleCardClick = handleCardClick; // функция колбэк открытия попап с картинкой при клике на карточку.
   }
 
+  //функция возвращала DOM-элемент.
   _getTemplate = () => {
+    // забираем размеку из HTML и клонируем элемент
     const cardElement = this._elementTemplate.content
       .querySelector(".element")
       .cloneNode(true);
 
+    // вернём DOM-элемент карточки
     return cardElement;
   };
 
@@ -45,13 +44,6 @@ export class Card {
       .classList.toggle("element__like_active");
   }
 
-  _handleOpenPopup() {
-    popupImg.src = this._data.link;
-    popupImg.alt = `Фото. ${this._data.name}`;
-    popupImgName.textContent = this._data.name;
-    this._openPopup(popupFoto);
-  }
-
   _setEventListeners() {
     this._element
       .querySelector(".element__like")
@@ -66,7 +58,7 @@ export class Card {
     this._element
       .querySelector(".element__img")
       .addEventListener("click", () => {
-        this._handleOpenPopup();
+        this._handleCardClick();
       });
   }
 }

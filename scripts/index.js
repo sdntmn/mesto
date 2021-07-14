@@ -1,7 +1,10 @@
 import { Card } from "./card.js";
 import { FormValidate } from "./formValidator.js";
 import { initialCards } from "./initial-cards.js";
-import "../pages/index.css";
+import { Section } from "./section.js";
+import { PopupWithForm } from "./popupWithForm.js";
+import { UserInfo } from "./userInfo.js";
+import { PopupWithImage } from "./popupWithImage.js";
 
 const keyEscape = "Escape";
 
@@ -12,6 +15,10 @@ const btnOpenMesto = blockProfile.querySelector(".profile__button");
 
 const popupProfile = document.querySelector("#popup_form_profile");
 const popupMesto = document.querySelector("#popup_form_mesto");
+const popup = ".popup";
+const popupFoto = document.querySelector("#popup_foto_mesto");
+
+const popupImg = document.querySelector(".popup__img");
 
 const btnSaveMesto = popupMesto.querySelector(".popup__button");
 
@@ -20,10 +27,10 @@ const inputLink = popupMesto.querySelector(".popup__input_value_link");
 
 const inputName = popupProfile.querySelector(".popup__input_value_name");
 const inputJob = popupProfile.querySelector(".popup__input_value_job");
-const newJob = blockProfile.querySelector(".profile__specialization");
-const newName = blockProfile.querySelector(".profile__item-info");
+const userJob = blockProfile.querySelector(".profile__specialization");
+const userName = blockProfile.querySelector(".profile__item-info");
 
-const containerCard = document.querySelector(".elements");
+const containerSelector = ".elements";
 
 const config = {
   formSelector: ".popup__form",
@@ -34,95 +41,72 @@ const config = {
   errorClass: "popup__input-error",
 };
 
-function createCard(item) {
-  const card = new Card(item, "#template-element", openPopup);
-  const cardElement = card.generateCard();
+// обработка попапа фото ==============================================
+// используется при создании карточки в колбэк клика на карточку
+const launchPopupImg = new PopupWithImage(popupFoto);
+console.log(launchPopupImg);
 
-  return cardElement;
-}
-
-initialCards.forEach((cardElement) => {
-  const initialCard = createCard(cardElement);
-  containerCard.prepend(initialCard);
-});
-
-/* Добавление новых карточек */
-const creatureFormCard = document.forms.formMesto;
-
-creatureFormCard.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-
-  const data = {
-    name: inputMesto.value,
-    link: inputLink.value,
-  };
-  const newCard = createCard(data);
-
-  containerCard.prepend(newCard);
-  closePopup(popupMesto);
-  creatureFormCard.reset();
-});
-
-/* Функция открытия попапов */
-function openPopup(popup) {
-  popup.classList.add("popup_is-opened");
-
-  document.addEventListener("keydown", closeByEscape); // навесили слушателя
-}
-
-/* Открытие popupProfile */
-btnOpenProfile.addEventListener("click", function () {
-  openPopup(popupProfile);
-  inputName.value = newName.textContent;
-  inputJob.value = newJob.textContent;
-});
-
-/* Открытие popupInputMesto */
-
-btnOpenMesto.addEventListener("click", function () {
-  creatureFormCard.reset();
-  btnSaveMesto.disabled = true;
-  openPopup(popupMesto);
-});
-
-/* Функция закрытия попапов */
-function closePopup(popup) {
-  popup.classList.remove("popup_is-opened");
-
-  document.removeEventListener("keydown", closeByEscape); // удалили слушателя
-}
-
-/* Ввод данных и закрытие popupProfile по кнопке сохранить */
-function formSubmitHandlerProfile(evt) {
-  evt.preventDefault();
-  newName.textContent = inputName.value;
-  newJob.textContent = inputJob.value;
-  closePopup(popupProfile);
-}
-popupProfile.addEventListener("submit", formSubmitHandlerProfile);
-
-/* Слушатель закрытия popups кликом мыши по полю и по кнопке закрытия popup  */
-const popups = Array.from(document.querySelectorAll(".popup"));
-popups.forEach((popup) => {
-  popup.addEventListener("click", (evt) => {
-    if (evt.target === evt.currentTarget) {
-      closePopup(popup);
-    }
-    if (evt.target.classList.contains("popup__close")) {
-      closePopup(popup);
-    }
+// создание карточки ==================================================
+const createCard = (item) => {
+  const card = new Card(item, "#template-element", function handleCardClick() {
+    launchPopupImg.open(item);
   });
+
+  return card.generateCard();
+};
+
+// Первоначальный вывод карточек из массива  ==========================
+const defaultCardList = new Section(
+  {
+    items: initialCards,
+    // отвечает за создание и отрисовку данных на странице
+    renderer: (item) => {
+      defaultCardList.addItem(createCard(item));
+    },
+  },
+  containerSelector
+);
+//Вызов первоначального вывода карточек
+defaultCardList.renderItems();
+
+// Добавление новых карточек ==========================================
+const popupForm = new PopupWithForm(popupMesto, {
+  submit: (data) => {
+    defaultCardList.addItem(createCard(data));
+
+    popupForm.close();
+  },
 });
 
-/* Функция закрытия по кнопке Esc*/
-function closeByEscape(evt) {
-  if (evt.key === keyEscape) {
-    const openedPopup = document.querySelector(".popup_is-opened");
-    closePopup(openedPopup);
-  }
-}
+// Вызов открытия попапа Место
+btnOpenMesto.addEventListener("click", () => {
+  popupForm.open();
+});
+
+// Изменения для User =================================================
+const popupFormProfile = new UserInfo(userName, userJob);
+
+const openPopupProfile = new PopupWithForm(popupProfile, {
+  submit: (data) => {
+    popupFormProfile.setUserInfo(data);
+    openPopupProfile.close();
+  },
+});
+console.log(openPopupProfile);
+
+// Вызов открытия попапа Профиля
+btnOpenProfile.addEventListener("click", () => {
+  inputJob.value = userJob.textContent;
+  inputName.value = userName.textContent;
+
+  openPopupProfile.open();
+});
+
+//popupFormProfile.setUserInfo({ inputName, inputJob });
+
+// Валидация форм =====================================================
 const validMesto = new FormValidate(config, "#form_mesto");
 const validProfile = new FormValidate(config, "#form_profile");
-
+// Вызов валидации
 validProfile.enableValidation();
 validMesto.enableValidation();
