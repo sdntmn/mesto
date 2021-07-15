@@ -33,9 +33,7 @@ export class Card {
   }
 
   _onDelete = () => {
-    if (this._element.querySelector(".element__trash")) {
-      this._element.remove();
-    }
+    this._element.remove();
   };
 
   _likeClick() {
