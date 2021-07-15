@@ -3,33 +3,31 @@
 export class Popup {
   constructor(selectorPopup) {
     this._selectorPopup = selectorPopup; // селектор попапа
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   // открытие попапа ==============================================
   open() {
-    console.log("открыли");
     this._selectorPopup.classList.add("popup_is-opened");
     document.addEventListener("keydown", this._handleEscClose); // навесили слушателя
-    this.setEventListeners();
   }
 
   // закрытие попапа. ==============================================
+
   close() {
-    console.log("закрыли");
     this._selectorPopup.classList.remove("popup_is-opened");
-    document.removeEventListener("keydown", this._handleEscClose);
+
+    document.removeEventListener("keydown", this._handleEscClose); // удалили слушателя
   }
 
-  // закрытие попапа по клавише ESC ========================== Переписать
+  // закрытие попапа по клавише ESC ================================
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
-      const openedPopup = document.querySelector(".popup_is-opened");
-      openedPopup.classList.remove("popup_is-opened");
-      //this.close();
+      this.close();
     }
   }
 
-  // добавляет слушатель клика иконке закрытия попапа ========= по полю ?????
+  // добавляет слушатель клика иконке закрытия попапа и по полю =====
   setEventListeners() {
     this._selectorPopup.addEventListener("click", (evt) => {
       if (

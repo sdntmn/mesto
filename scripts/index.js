@@ -6,8 +6,6 @@ import { PopupWithForm } from "./popupWithForm.js";
 import { UserInfo } from "./userInfo.js";
 import { PopupWithImage } from "./popupWithImage.js";
 
-const keyEscape = "Escape";
-
 const blockProfile = document.querySelector(".profile");
 
 const btnOpenProfile = blockProfile.querySelector(".profile__opened");
@@ -15,15 +13,7 @@ const btnOpenMesto = blockProfile.querySelector(".profile__button");
 
 const popupProfile = document.querySelector("#popup_form_profile");
 const popupMesto = document.querySelector("#popup_form_mesto");
-const popup = ".popup";
 const popupFoto = document.querySelector("#popup_foto_mesto");
-
-const popupImg = document.querySelector(".popup__img");
-
-const btnSaveMesto = popupMesto.querySelector(".popup__button");
-
-const inputMesto = popupMesto.querySelector(".popup__input_value_mesto");
-const inputLink = popupMesto.querySelector(".popup__input_value_link");
 
 const inputName = popupProfile.querySelector(".popup__input_value_name");
 const inputJob = popupProfile.querySelector(".popup__input_value_job");
@@ -42,9 +32,9 @@ const config = {
 };
 
 // обработка попапа фото ==============================================
-// используется при создании карточки в колбэк клика на карточку
+// используется при создании карточки в колбэк - клика на карточку
 const launchPopupImg = new PopupWithImage(popupFoto);
-console.log(launchPopupImg);
+launchPopupImg.setEventListeners();
 
 // создание карточки ==================================================
 const createCard = (item) => {
@@ -66,7 +56,7 @@ const defaultCardList = new Section(
   },
   containerSelector
 );
-//Вызов первоначального вывода карточек
+//Вызов первоначального вывода карточек ===============================
 defaultCardList.renderItems();
 
 // Добавление новых карточек ==========================================
@@ -78,7 +68,7 @@ const popupForm = new PopupWithForm(popupMesto, {
   },
 });
 
-// Вызов открытия попапа Место
+// Вызов открытия попапа Место ========================================
 btnOpenMesto.addEventListener("click", () => {
   popupForm.open();
 });
@@ -89,24 +79,25 @@ const popupFormProfile = new UserInfo(userName, userJob);
 const openPopupProfile = new PopupWithForm(popupProfile, {
   submit: (data) => {
     popupFormProfile.setUserInfo(data);
+
     openPopupProfile.close();
   },
 });
-console.log(openPopupProfile);
 
-// Вызов открытия попапа Профиля
+// Вызов открытия попапа Профиля ======================================
 btnOpenProfile.addEventListener("click", () => {
-  inputJob.value = userJob.textContent;
-  inputName.value = userName.textContent;
+  const userData = popupFormProfile.getUserInfo();
+  inputJob.value = userData.userJob;
+  inputName.value = userData.userName;
 
   openPopupProfile.open();
 });
 
-//popupFormProfile.setUserInfo({ inputName, inputJob });
-
 // Валидация форм =====================================================
 const validMesto = new FormValidate(config, "#form_mesto");
 const validProfile = new FormValidate(config, "#form_profile");
-// Вызов валидации
-validProfile.enableValidation();
-validMesto.enableValidation();
+
+// Вызов валидации ====================================================
+
+openPopupProfile.setEventListeners(validProfile.enableValidation());
+popupForm.setEventListeners(validMesto.enableValidation());

@@ -7,30 +7,33 @@ export class PopupWithForm extends Popup {
 
     this._submit = submit; // колбэк сабмита формы
     this._form = selectorPopup.querySelector(".popup__form"); // форма попапа
+    this._getInputValues = this._getInputValues.bind(this);
   }
 
-  // собирает данные всех полей формы
+  // собирает данные всех полей формы=====================================
   _getInputValues() {
-    this._inputList = Array.from(this._form.querySelectorAll(".popup__input"));
-    const data = {};
+    this._inputList = this._form.querySelectorAll(".popup__input");
+    this.data = {};
     this._inputList.forEach((input) => {
-      data[input.name] = input.value;
+      this.data[input.name] = input.value;
     });
-    return data;
+    return this.data;
   }
 
   // Перезаписывает родительский метод (устанавлевает слушателя клика по иконке закрытия попапа) и добавляет обработчик сабмита формы
   setEventListeners() {
+    super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._submit(this._getInputValues());
-      super.setEventListeners();
+      this.close();
     });
   }
 
   // Перезаписывает родительский метод close, так как форма должна ещё и сбрасываться.
+
   close() {
-    this._form.reset();
     super.close();
+    this._form.reset();
   }
 }
