@@ -10,7 +10,11 @@
   <body class="root">
     <div class="page">
       <header class="header page__cover">
-        <img class="logo" src="./images/Vector.svg" alt="Логотип сайта" />
+        <img
+          class="logo"
+          src="<%=require('./images/Vector.svg')%>"
+          alt="Логотип сайта"
+        />
       </header>
 
       <main class="content page__cover">
@@ -20,7 +24,7 @@
               <div class="profile__data">
                 <img
                   class="profile__avatar"
-                  src="./images/image.jpg"
+                  src="<%=require('./images/image.jpg')%>"
                   alt="Фото пользователя"
                 />
                 <div class="profile__item">

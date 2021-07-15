@@ -5,6 +5,7 @@ import { Section } from "./section.js";
 import { PopupWithForm } from "./popupWithForm.js";
 import { UserInfo } from "./userInfo.js";
 import { PopupWithImage } from "./popupWithImage.js";
+import "../pages/index.css";
 
 const blockProfile = document.querySelector(".profile");
 
