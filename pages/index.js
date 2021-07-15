@@ -1,36 +1,27 @@
-import { Card } from "./card.js";
-import { FormValidate } from "./formValidator.js";
-import { initialCards } from "./initial-cards.js";
-import { Section } from "./section.js";
-import { PopupWithForm } from "./popupWithForm.js";
-import { UserInfo } from "./userInfo.js";
-import { PopupWithImage } from "./popupWithImage.js";
-import "../pages/index.css";
-
-const blockProfile = document.querySelector(".profile");
-
-const btnOpenProfile = blockProfile.querySelector(".profile__opened");
-const btnOpenMesto = blockProfile.querySelector(".profile__button");
-
-const popupProfile = document.querySelector("#popup_form_profile");
-const popupMesto = document.querySelector("#popup_form_mesto");
-const popupFoto = document.querySelector("#popup_foto_mesto");
-
-const inputName = popupProfile.querySelector(".popup__input_value_name");
-const inputJob = popupProfile.querySelector(".popup__input_value_job");
-const userJob = blockProfile.querySelector(".profile__specialization");
-const userName = blockProfile.querySelector(".profile__item-info");
-
-const containerSelector = ".elements";
-
-const config = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: ".popup__button:disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error",
-};
+import { Card } from "../scripts/card.js";
+import { FormValidate } from "../scripts/formValidator.js";
+import { initialCards } from "../utils/constants";
+import { Section } from "../scripts/section.js";
+import { PopupWithForm } from "../scripts/popupWithForm.js";
+import { UserInfo } from "../scripts/userInfo.js";
+import { PopupWithImage } from "../scripts/popupWithImage.js";
+import "./index.css";
+import {
+  btnOpenProfile,
+  btnOpenMesto,
+  popupProfile,
+  popupMesto,
+  popupFoto,
+  inputName,
+  inputJob,
+  userJob,
+  userName,
+  containerSelector,
+  config,
+  templateSelector,
+  formMesto,
+  formProfile,
+} from "../utils/constants";
 
 // обработка попапа фото ==============================================
 // используется при создании карточки в колбэк - клика на карточку
@@ -39,7 +30,7 @@ launchPopupImg.setEventListeners();
 
 // создание карточки ==================================================
 const createCard = (item) => {
-  const card = new Card(item, "#template-element", function handleCardClick() {
+  const card = new Card(item, templateSelector, function handleCardClick() {
     launchPopupImg.open(item);
   });
 
@@ -95,8 +86,8 @@ btnOpenProfile.addEventListener("click", () => {
 });
 
 // Валидация форм =====================================================
-const validMesto = new FormValidate(config, "#form_mesto");
-const validProfile = new FormValidate(config, "#form_profile");
+const validMesto = new FormValidate(config, formMesto);
+const validProfile = new FormValidate(config, formProfile);
 
 // Вызов валидации ====================================================
 
