@@ -29,5 +29,5 @@
 
 .popup__button:disabled {
   opacity: 20%;
-  cursor: not-allowed;
+  cursor: default;
 }
