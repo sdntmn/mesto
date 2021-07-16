@@ -1,14 +1,15 @@
-import { Card } from "../scripts/card.js";
-import { FormValidate } from "../scripts/formValidator.js";
+import { Card } from "../scripts/Card.js";
+import { FormValidate } from "../scripts/FormValidator.js";
 import { initialCards } from "../utils/constants";
-import { Section } from "../scripts/section.js";
-import { PopupWithForm } from "../scripts/popupWithForm.js";
-import { UserInfo } from "../scripts/userInfo.js";
-import { PopupWithImage } from "../scripts/popupWithImage.js";
+import { Section } from "../scripts/Section.js";
+import { PopupWithForm } from "../scripts/PopupWithForm.js";
+import { UserInfo } from "../scripts/UserInfo.js";
+import { PopupWithImage } from "../scripts/PopupWithImage.js";
 import "./index.css";
 import {
   btnOpenProfile,
   btnOpenMesto,
+  btnSaveMesto,
   popupProfile,
   popupMesto,
   popupFoto,
@@ -62,6 +63,8 @@ const popupForm = new PopupWithForm(popupMesto, {
 
 // Вызов открытия попапа Место ========================================
 btnOpenMesto.addEventListener("click", () => {
+  validMesto.resetInputError();
+  validMesto.disableButtonElement();
   popupForm.open();
 });
 
@@ -78,6 +81,7 @@ const openPopupProfile = new PopupWithForm(popupProfile, {
 
 // Вызов открытия попапа Профиля ======================================
 btnOpenProfile.addEventListener("click", () => {
+  validProfile.resetInputError();
   const userData = popupFormProfile.getUserInfo();
   inputJob.value = userData.userJob;
   inputName.value = userData.userName;
