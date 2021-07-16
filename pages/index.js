@@ -9,7 +9,6 @@ import "./index.css";
 import {
   btnOpenProfile,
   btnOpenMesto,
-  btnSaveMesto,
   popupProfile,
   popupMesto,
   popupFoto,

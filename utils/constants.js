@@ -2,7 +2,6 @@ export {
   blockProfile,
   btnOpenProfile,
   btnOpenMesto,
-  btnSaveMesto,
   popupProfile,
   popupMesto,
   popupFoto,
@@ -21,7 +20,6 @@ const popupMesto = document.querySelector("#popup_form_mesto");
 const popupFoto = document.querySelector("#popup_foto_mesto");
 const btnOpenProfile = blockProfile.querySelector(".profile__opened");
 const btnOpenMesto = blockProfile.querySelector(".profile__button");
-const btnSaveMesto = popupMesto.querySelector(".popup__button");
 const popupProfile = document.querySelector("#popup_form_profile");
 
 const inputName = popupProfile.querySelector(".popup__input_value_name");
