@@ -8,6 +8,7 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "",
   },
   module: {
     rules: [
@@ -17,6 +18,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
+            options: { importLoaders: 1 },
           },
           "postcss-loader",
         ],
