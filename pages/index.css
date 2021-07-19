@@ -20,6 +20,7 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__button/profile__button.css);
+@import url(../blocks/profile/__change-avatar/profile__change-avatar.css);
 @import url(../blocks/profile/__data/profile__data.css);
 @import url(../blocks/profile/__img/profile__img.css);
 @import url(../blocks/profile/__info/profile__info.css);
@@ -27,6 +28,7 @@
 @import url(../blocks/profile/__item-info/profile__item-info.css);
 @import url(../blocks/profile/__item-name/profile__item-name.css);
 @import url(../blocks/profile/__opened/profile__opened.css);
+@import url(../blocks/profile/__opened-avatar/profile__opened-avatar.css);
 @import url(../blocks/profile/__specialization/profile__specialization.css);
 
 /* Блок Popup */
@@ -49,10 +51,12 @@
 @import url(../blocks/content/content.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
+@import url(../blocks/element/__counting-likes/element__counting-likes.css);
 @import url(../blocks/element/__img/element__img.css);
 @import url(../blocks/element/__like/element__like.css);
 @import url(../blocks/element/__like/_active/element__like_active.css);
 @import url(../blocks/element/__name-mesto/element__name-mesto.css);
+@import url(../blocks/element/__number-likes/element__number-likes.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/element/__trash/element__trash.css);
 
