@@ -3,7 +3,6 @@
 export class Popup {
   constructor(selectorPopup) {
     this._selectorPopup = selectorPopup; // селектор попапа
-    console.log(this._selectorPopup);
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
