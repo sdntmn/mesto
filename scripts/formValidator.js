@@ -9,6 +9,7 @@ export class FormValidate {
     );
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
+    this._buttonElement = this._formSelector.querySelector(this._button);
   }
 
   _showInputError() {
@@ -45,11 +46,10 @@ export class FormValidate {
   };
 
   _toggleButtonState = () => {
-    const button = this._formSelector.querySelector(this._button);
     if (this._hasInvalidInput()) {
-      button.disabled = true;
+      this._buttonElement.disabled = true;
     } else {
-      button.disabled = false;
+      this._buttonElement.disabled = false;
     }
   };
 
@@ -64,5 +64,15 @@ export class FormValidate {
 
   enableValidation() {
     this._setEventListeners();
+  }
+
+  resetInputError() {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(this._checkInputValidity(inputElement));
+    });
+  }
+
+  disableButtonElement() {
+    this._buttonElement.disabled = true;
   }
 }
