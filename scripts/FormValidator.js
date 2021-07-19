@@ -68,8 +68,7 @@ export class FormValidate {
 
   resetInputError() {
     this._inputList.forEach((inputElement) => {
-      this._checkInputValidity(inputElement);
-      this._hideInputError(inputElement);
+      this._hideInputError(this._checkInputValidity(inputElement));
     });
   }
 

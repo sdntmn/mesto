@@ -16,7 +16,7 @@
   max-height: 24px;
   height: 100%;
   box-sizing: border-box;
-  transition: 1s;
+  transition: 0.5s;
 }
 
 @media (max-width: 880px) {
