@@ -76,3 +76,4 @@ export class FormValidate {
     this._buttonElement.disabled = true;
   }
 }
+
