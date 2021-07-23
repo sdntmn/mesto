@@ -3,16 +3,15 @@ export class Section {
   _renderer;
   _containerSelector;
 
-  constructor({ items, renderer }, containerSelector) {
-    this._items = items;
-    console.log(this._items);
+  constructor({ res, renderer }, containerSelector) {
+    this._res = res;
     this._renderer = renderer; // renderer — это функция переданная колбэком
     this._containerSelector = document.querySelector(containerSelector);
   }
 
   // отвечает за отрисовку всех элементов.==============================
   renderItems() {
-    this._items.forEach((cardElement) => {
+    this._res.forEach((cardElement) => {
       this._renderer(cardElement);
     });
   }
