@@ -5,6 +5,7 @@ export class Section {
 
   constructor({ items, renderer }, containerSelector) {
     this._items = items;
+    console.log(this._items);
     this._renderer = renderer; // renderer — это функция переданная колбэком
     this._containerSelector = document.querySelector(containerSelector);
   }

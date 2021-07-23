@@ -1,3 +1,4 @@
+import { Api } from "../scripts/Api.js";
 import { Card } from "../scripts/Card.js";
 import { FormValidate } from "../scripts/FormValidator.js";
 import { initialCards } from "../utils/constants";
@@ -21,7 +22,37 @@ import {
   templateSelector,
   formMesto,
   formProfile,
+  token,
 } from "../utils/constants";
+
+// Запрос API =========================================================
+const configApi = {
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-26",
+  headers: {
+    authorization: token,
+    "Content-Type": "application/json",
+  },
+};
+console.log(configApi);
+
+// Запрос к Api ======================================================
+const api = new Api(configApi);
+
+// Первоначальный вывод карточек из массива Api ==========================
+api.getInitialCards().then((items) => {
+  const listCard = new Section(
+    {
+      items,
+      // отвечает за создание и отрисовку данных на странице
+      renderer: (item) => {
+        console.log(item);
+        listCard.addItem(createCard(item));
+      },
+    },
+    containerSelector
+  );
+  listCard.renderItems();
+});
 
 // обработка попапа фото ==============================================
 // используется при создании карточки в колбэк - клика на карточку
@@ -37,6 +68,7 @@ const createCard = (item) => {
   return card.generateCard();
 };
 
+/*
 // Первоначальный вывод карточек из массива  ==========================
 const defaultCardList = new Section(
   {
@@ -50,7 +82,7 @@ const defaultCardList = new Section(
 );
 //Вызов первоначального вывода карточек ===============================
 defaultCardList.renderItems();
-
+*/
 // Добавление новых карточек ==========================================
 const popupForm = new PopupWithForm(popupMesto, {
   submit: (data) => {

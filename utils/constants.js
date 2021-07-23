@@ -14,7 +14,10 @@ export {
   templateSelector,
   formMesto,
   formProfile,
+  token,
 };
+const token = "6be9abb7-ced4-4a7c-8643-2f58993788b8";
+
 const blockProfile = document.querySelector(".profile");
 const popupMesto = document.querySelector("#popup_form_mesto");
 const popupFoto = document.querySelector("#popup_foto_mesto");
