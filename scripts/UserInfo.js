@@ -3,6 +3,7 @@
 export class UserInfo {
   constructor(selectorNameUser, selectorInfo) {
     this._selectorNameUser = selectorNameUser;
+    console.log(this._selectorNameUser);
     this._selectorInfo = selectorInfo;
   }
 
@@ -19,6 +20,7 @@ export class UserInfo {
   // принимает новые данные пользователя и добавляет их на страницу.
   setUserInfo(input) {
     this._selectorNameUser.textContent = input.snp;
+    console.log(this._selectorNameUser.textContent);
     this._selectorInfo.textContent = input.job;
   }
 }

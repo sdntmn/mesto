@@ -26,6 +26,7 @@ import {
 } from "../utils/constants";
 
 // Запрос API =========================================================
+
 const configApi = {
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-26",
   headers: {
@@ -33,25 +34,23 @@ const configApi = {
     "Content-Type": "application/json",
   },
 };
-console.log(configApi);
 
 // Запрос к Api ======================================================
 const api = new Api(configApi);
 
 // Первоначальный вывод карточек из массива Api ==========================
-api.getInitialCards().then((items) => {
-  const listCard = new Section(
+api.getInitialCards().then((res) => {
+  const serverCard = new Section(
     {
-      items,
+      res,
       // отвечает за создание и отрисовку данных на странице
       renderer: (item) => {
-        console.log(item);
-        listCard.addItem(createCard(item));
+        serverCard.addItem(createCard(item));
       },
     },
     containerSelector
   );
-  listCard.renderItems();
+  serverCard.renderItems();
 });
 
 // обработка попапа фото ==============================================
@@ -99,16 +98,24 @@ btnOpenMesto.addEventListener("click", () => {
   popupForm.open();
 });
 
+// в работе ============================= нужно 2 обраб. данных
+
+//api.getDataUser().then((data) => {
+//  console.log(data);
+//});
+
 // Изменения для User =================================================
 const popupFormProfile = new UserInfo(userName, userJob);
 
-const openPopupProfile = new PopupWithForm(popupProfile, {
-  submit: (data) => {
+
+const openPopupProfile = new PopupWithForm(popupProfile, api, {
+  api.getDataUser().then((data) => {
     popupFormProfile.setUserInfo(data);
 
     openPopupProfile.close();
   },
 });
+
 
 // Вызов открытия попапа Профиля ======================================
 btnOpenProfile.addEventListener("click", () => {
@@ -126,5 +133,5 @@ const validProfile = new FormValidate(config, formProfile);
 
 // Вызов валидации ====================================================
 
-openPopupProfile.setEventListeners(validProfile.enableValidation());
+//openPopupProfile.setEventListeners(validProfile.enableValidation());
 popupForm.setEventListeners(validMesto.enableValidation());
