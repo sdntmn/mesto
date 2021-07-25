@@ -5,6 +5,7 @@ export class Card {
 
   constructor(data, templateSelector, handleCardClick) {
     this._data = data;
+    this._idCard = data._id; // id - карточки
     this._elementTemplate = document.querySelector(templateSelector);
     this._handleCardClick = handleCardClick; // функция колбэк открытия попап с картинкой при клике на карточку.
   }
@@ -20,15 +21,20 @@ export class Card {
     return cardElement;
   };
 
-  generateCard() {
+  generateCard(userId) {
     this._element = this._getTemplate();
     this._elementImg = this._element.querySelector(".element__img");
+    this._elementDel = this._element.querySelector(".element__trash");
+    if (userId === this._idCard) {
+      this._elementDel = this._elementDel.classList.add("element_is-visible");
+    }
     this._setEventListeners();
 
     this._elementImg.alt = `Фото. ${this._data.name}`;
     this._element.querySelector(".element__name-mesto").textContent =
       this._data.name;
     this._elementImg.src = this._data.link;
+
     return this._element;
   }
 

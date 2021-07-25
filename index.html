@@ -37,14 +37,14 @@
 
                 <div class="profile__item">
                   <div class="profile__item-name">
-                    <h1 class="profile__item-info">Жак-Ив Кусто</h1>
+                    <h1 class="profile__item-info"></h1>
                     <button
                       class="profile__opened"
                       type="button"
                       aria-label="Редактировать"
                     ></button>
                   </div>
-                  <p class="profile__specialization">Исследователь океана</p>
+                  <p class="profile__specialization"></p>
                 </div>
               </div>
               <button
@@ -196,7 +196,7 @@
           </figure>
         </div>
       </div>
-      <div class="popup" id="popup_avatar_profile">
+      <div class="popup" id="popup_form_avatar">
         <div class="popup__container">
           <form
             class="popup__form popup__form_type_avatar"
@@ -207,7 +207,7 @@
             <button
               class="popup__close"
               type="button"
-              aria-label="Кнопка закрытия формы"
+              aria-label="Кнопка закрытия формы аватар"
             ></button>
             <fieldset class="popup__data">
               <legend class="popup__title">Обновить аватар</legend>
@@ -219,7 +219,7 @@
                 name="avatar"
                 required
               />
-              <span class="popup__input-error link-input-error"></span>
+              <span class="popup__input-error avatar-input-error"></span>
             </fieldset>
             <button
               type="submit"

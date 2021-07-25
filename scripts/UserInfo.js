@@ -3,24 +3,28 @@
 export class UserInfo {
   constructor(selectorNameUser, selectorInfo) {
     this._selectorNameUser = selectorNameUser;
-    console.log(this._selectorNameUser);
     this._selectorInfo = selectorInfo;
+    this._nameUser = "";
+    this._aboutUser = "";
+  }
+  // Принимает новые данные пользователя ============================
+  setUserInfo({ name, about }) {
+    this._nameUser = name; // input.snp;
+    this._aboutUser = about; // input.job
   }
 
-  // возвращает объект с данными пользователя========================
-  getUserInfo() {
-    const dataUser = {
-      userName: this._selectorNameUser.textContent,
-      userJob: this._selectorInfo.textContent,
+  // Возвращает объект с данными пользователя========================
+  getUserInfo(data) {
+    console.log(data);
+    return {
+      name: this._nameUser, // input.snp;
+      about: this._aboutUser, // input.job
     };
-
-    return dataUser;
   }
 
-  // принимает новые данные пользователя и добавляет их на страницу.
-  setUserInfo(input) {
-    this._selectorNameUser.textContent = input.snp;
-    console.log(this._selectorNameUser.textContent);
-    this._selectorInfo.textContent = input.job;
+  //Обновление данных на странице ===================================
+  updateUserInfo() {
+    this._selectorNameUser.textContent = this._nameUser;
+    this._selectorInfo.textContent = this._aboutUser;
   }
 }

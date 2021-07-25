@@ -30,8 +30,22 @@ export class Api {
   }
 
   // Получить данные пользователя (GET) ==========================================
-  getDataUser() {
+  getDataUser(dataUser) {
     return fetch(this._url + "/users/me ", {
+      headers: this._headers,
+      body: JSON.stringify(dataUser),
+    }).then(this._checkResponsPromise);
+  }
+
+  //Для синхронного первоначального вывода данных пользователя и карточек на страницу
+  renderFirstData() {
+    return Promise.All([this.getDataUser()], [this.getInitialCards()]);
+  }
+
+  // Запрос данных для лайка карточки ============================================
+  getLikeCardId() {
+    return fetch(this._url + "/cards/likes/cardId ", {
+      method: "PUT",
       headers: this._headers,
     }).then(this._checkResponsPromise);
   }

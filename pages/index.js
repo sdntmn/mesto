@@ -8,8 +8,10 @@ import { UserInfo } from "../scripts/UserInfo.js";
 import { PopupWithImage } from "../scripts/PopupWithImage.js";
 import "./index.css";
 import {
+  btnOpenAvatar,
   btnOpenProfile,
   btnOpenMesto,
+  popupAvatar,
   popupProfile,
   popupMesto,
   popupFoto,
@@ -20,13 +22,14 @@ import {
   containerSelector,
   config,
   templateSelector,
+  formAvatar,
   formMesto,
   formProfile,
   token,
 } from "../utils/constants";
 
 // Запрос API =========================================================
-
+let userId = null;
 const configApi = {
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-26",
   headers: {
@@ -38,6 +41,16 @@ const configApi = {
 // Запрос к Api ======================================================
 const api = new Api(configApi);
 
+const dataUser = api.getDataUser();
+/*
+function getDataUserId() {
+  const dataUserid = "";
+  api.getDataUser().then((data) => {
+  dataUserid = data._id;
+});
+
+console.log(dataUserid);
+*/
 // Первоначальный вывод карточек из массива Api ==========================
 api.getInitialCards().then((res) => {
   const serverCard = new Section(
@@ -64,74 +77,76 @@ const createCard = (item) => {
     launchPopupImg.open(item);
   });
 
-  return card.generateCard();
+  return card.generateCard(userId);
 };
 
-/*
-// Первоначальный вывод карточек из массива  ==========================
-const defaultCardList = new Section(
-  {
-    items: initialCards,
-    // отвечает за создание и отрисовку данных на странице
-    renderer: (item) => {
-      defaultCardList.addItem(createCard(item));
-    },
-  },
-  containerSelector
-);
-//Вызов первоначального вывода карточек ===============================
-defaultCardList.renderItems();
-*/
+// Изменения для User =================================================
+const dataUserInfo = new UserInfo(userName, userJob);
+
+// Получение данных пользователя сервера и вывод на страницу =====================
+dataUser.then((data) => {
+  userId = data._id;
+
+  const dataUserServer = {
+    name: data.name,
+    about: data.about,
+  };
+  dataUserInfo.setUserInfo(dataUserServer);
+  dataUserInfo.updateUserInfo();
+});
+
 // Добавление новых карточек ==========================================
-const popupForm = new PopupWithForm(popupMesto, {
+const popupFormMesto = new PopupWithForm(popupMesto, {
   submit: (data) => {
+    console.log(userId);
     defaultCardList.addItem(createCard(data));
 
-    popupForm.close();
+    popupFormMesto.close();
   },
+});
+
+//====================================================================
+const popupFormProfile = new PopupWithForm(popupProfile, {
+  submit: (data) => {
+    dataUserInfo.getUserInfo(data);
+
+    popupFormProfile.close();
+  },
+});
+
+const popupFormAvatar = new PopupWithForm(popupAvatar, {
+  submit: () => {
+    popupFormAvatar.close();
+  },
+});
+
+// Вызов открытия попапа Профиля ======================================
+btnOpenProfile.addEventListener("click", () => {
+  validProfile.resetInputError();
+
+  popupFormProfile.open();
+});
+
+// Вызов открытия попапа редактирование Аватар ========================
+btnOpenAvatar.addEventListener("click", () => {
+  validAvatar.resetInputError();
+  validAvatar.disableButtonElement();
+  popupFormAvatar.open();
 });
 
 // Вызов открытия попапа Место ========================================
 btnOpenMesto.addEventListener("click", () => {
   validMesto.resetInputError();
   validMesto.disableButtonElement();
-  popupForm.open();
-});
-
-// в работе ============================= нужно 2 обраб. данных
-
-//api.getDataUser().then((data) => {
-//  console.log(data);
-//});
-
-// Изменения для User =================================================
-const popupFormProfile = new UserInfo(userName, userJob);
-
-
-const openPopupProfile = new PopupWithForm(popupProfile, api, {
-  api.getDataUser().then((data) => {
-    popupFormProfile.setUserInfo(data);
-
-    openPopupProfile.close();
-  },
-});
-
-
-// Вызов открытия попапа Профиля ======================================
-btnOpenProfile.addEventListener("click", () => {
-  validProfile.resetInputError();
-  const userData = popupFormProfile.getUserInfo();
-  inputJob.value = userData.userJob;
-  inputName.value = userData.userName;
-
-  openPopupProfile.open();
+  popupFormMesto.open();
 });
 
 // Валидация форм =====================================================
 const validMesto = new FormValidate(config, formMesto);
 const validProfile = new FormValidate(config, formProfile);
+const validAvatar = new FormValidate(config, formAvatar);
 
 // Вызов валидации ====================================================
-
-//openPopupProfile.setEventListeners(validProfile.enableValidation());
-popupForm.setEventListeners(validMesto.enableValidation());
+popupFormAvatar.setEventListeners(validAvatar.enableValidation());
+popupFormProfile.setEventListeners(validProfile.enableValidation());
+popupFormMesto.setEventListeners(validMesto.enableValidation());
