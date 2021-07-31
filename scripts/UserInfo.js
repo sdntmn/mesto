@@ -1,11 +1,13 @@
 // Отвечает за управление отображением информации о пользователе на странице
 
 export class UserInfo {
-  constructor(selectorNameUser, selectorInfo) {
+  constructor(selectorNameUser, selectorInfo, selectorAvatar) {
     this._selectorNameUser = selectorNameUser;
     this._selectorInfo = selectorInfo;
+    this._selectorAvatar = selectorAvatar;
     this._nameUser = "";
     this._aboutUser = "";
+    this._avatarUser = "";
   }
   // Принимает новые данные пользователя ============================
   setUserInfo({ name, about }) {
@@ -13,12 +15,22 @@ export class UserInfo {
     this._aboutUser = about; // input.job
   }
 
+  // Принимает новый аватар пользователя ============================
+  setUserAvatar({ avatar }) {
+    this._avatarUser = avatar;
+  }
   // Возвращает объект с данными пользователя========================
-  getUserInfo(data) {
-    console.log(data);
+  getUserInfo() {
     return {
-      name: this._nameUser, // input.snp;
-      about: this._aboutUser, // input.job
+      name: this._nameUser,
+      about: this._aboutUser,
+    };
+  }
+
+  // Возвращает аватар пользователя===================================
+  getUseravatar(data) {
+    return {
+      avatar: this._avatarUser,
     };
   }
 
@@ -26,5 +38,10 @@ export class UserInfo {
   updateUserInfo() {
     this._selectorNameUser.textContent = this._nameUser;
     this._selectorInfo.textContent = this._aboutUser;
+  }
+
+  //Обновление аватара на странице ===================================
+  updateUserAvatar() {
+    this._selectorAvatar.src = this._avatarUser;
   }
 }

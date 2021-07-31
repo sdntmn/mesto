@@ -7,3 +7,9 @@ scripts/testsn.js
 scripts/vt.js
 node_modules
 /dist
+.idea/fileColors.xml
+*.iml
+.idea/modules.xml
+.idea/vcs.xml
+package-lock.json
+*.json
