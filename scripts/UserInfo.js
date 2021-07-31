@@ -1,26 +1,47 @@
 // Отвечает за управление отображением информации о пользователе на странице
 
 export class UserInfo {
-  constructor(selectorNameUser, selectorInfo) {
+  constructor(selectorNameUser, selectorInfo, selectorAvatar) {
     this._selectorNameUser = selectorNameUser;
-    console.log(this._selectorNameUser);
     this._selectorInfo = selectorInfo;
+    this._selectorAvatar = selectorAvatar;
+    this._nameUser = "";
+    this._aboutUser = "";
+    this._avatarUser = "";
+  }
+  // Принимает новые данные пользователя ============================
+  setUserInfo({ name, about }) {
+    this._nameUser = name; // input.snp;
+    this._aboutUser = about; // input.job
   }
 
-  // возвращает объект с данными пользователя========================
+  // Принимает новый аватар пользователя ============================
+  setUserAvatar({ avatar }) {
+    this._avatarUser = avatar;
+  }
+  // Возвращает объект с данными пользователя========================
   getUserInfo() {
-    const dataUser = {
-      userName: this._selectorNameUser.textContent,
-      userJob: this._selectorInfo.textContent,
+    return {
+      name: this._nameUser,
+      about: this._aboutUser,
     };
-
-    return dataUser;
   }
 
-  // принимает новые данные пользователя и добавляет их на страницу.
-  setUserInfo(input) {
-    this._selectorNameUser.textContent = input.snp;
-    console.log(this._selectorNameUser.textContent);
-    this._selectorInfo.textContent = input.job;
+  // Возвращает аватар пользователя===================================
+  getUseravatar(data) {
+    return {
+      avatar: this._avatarUser,
+    };
+  }
+
+  //Обновление данных на странице ===================================
+  updateUserInfo() {
+    this._selectorNameUser.textContent = this._nameUser;
+    this._selectorInfo.textContent = this._aboutUser;
+  }
+
+  //Обновление аватара на странице ===================================
+  updateUserAvatar() {
+    this._selectorAvatar.src = this._avatarUser;
   }
 }

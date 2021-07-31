@@ -24,9 +24,7 @@
               <div class="profile__data">
                 <div class="profile__change-avatar">
                   <img
-                    class="profile__avatar"
-                    src="<%=require('./images/image.jpg')%>"
-                    alt="Фото пользователя"
+                    class="profile__avatar"                    
                   />
                   <button
                     class="profile__opened-avatar"
@@ -37,14 +35,14 @@
 
                 <div class="profile__item">
                   <div class="profile__item-name">
-                    <h1 class="profile__item-info">Жак-Ив Кусто</h1>
+                    <h1 class="profile__item-info"></h1>
                     <button
                       class="profile__opened"
                       type="button"
                       aria-label="Редактировать"
                     ></button>
                   </div>
-                  <p class="profile__specialization">Исследователь океана</p>
+                  <p class="profile__specialization"></p>
                 </div>
               </div>
               <button
@@ -103,26 +101,26 @@
               <legend class="popup__title">Редактировать профиль</legend>
               <input
                 class="popup__input popup__input_value_name"
-                id="snp-input"
+                id="name-input"
                 minlength="2"
                 maxlength="40"
                 placeholder="Введите ФИО"
                 type="text"
-                name="snp"
+                name="name"
                 required
               />
-              <span class="popup__input-error snp-input-error"></span>
+              <span class="popup__input-error name-input-error"></span>
               <input
                 class="popup__input popup__input_value_job"
-                id="job-input"
+                id="about-input"
                 minlength="2"
                 maxlength="200"
                 placeholder="Введите специализацию"
                 type="text"
-                name="job"
+                name="about"
                 required
               />
-              <span class="popup__input-error job-input-error"></span>
+              <span class="popup__input-error about-input-error"></span>
             </fieldset>
             <button type="submit" class="popup__button" aria-label="Сохранить">
               Сохранить
@@ -196,7 +194,7 @@
           </figure>
         </div>
       </div>
-      <div class="popup" id="popup_avatar_profile">
+      <div class="popup" id="popup_form_avatar">
         <div class="popup__container">
           <form
             class="popup__form popup__form_type_avatar"
@@ -207,7 +205,7 @@
             <button
               class="popup__close"
               type="button"
-              aria-label="Кнопка закрытия формы"
+              aria-label="Кнопка закрытия формы аватар"
             ></button>
             <fieldset class="popup__data">
               <legend class="popup__title">Обновить аватар</legend>
@@ -219,7 +217,7 @@
                 name="avatar"
                 required
               />
-              <span class="popup__input-error link-input-error"></span>
+              <span class="popup__input-error avatar-input-error"></span>
             </fieldset>
             <button
               type="submit"
@@ -251,8 +249,7 @@
             <button
               type="submit"
               class="popup__button"
-              aria-label="Да"
-              disabled
+              aria-label="Да"            
             >
               Да
             </button>

@@ -1,9 +1,7 @@
 export class Api {
   constructor(configApi) {
     this._url = configApi.baseUrl; // тело конструктора
-    console.log(this._url);
     this._headers = configApi.headers;
-    console.log(this._headers);
   }
 
   // Проверка работы промиса ======================================================
@@ -22,23 +20,40 @@ export class Api {
   }
 
   // Добавить карточку (POST) =====================================================
-  setCardUser() {
+  setCardUser(userCard) {
     return fetch(this._url + "/cards", {
       method: "POST",
       headers: this._headers,
+      body: JSON.stringify({
+        name: userCard.name,
+        link: userCard.link,
+      }),
     }).then(this._checkResponsPromise);
   }
 
   // Получить данные пользователя (GET) ==========================================
-  getDataUser() {
+  getDataUser(dataUser) {
     return fetch(this._url + "/users/me ", {
+      headers: this._headers,
+      body: JSON.stringify(dataUser),
+    }).then(this._checkResponsPromise);
+  }
+
+  //Для синхронного первоначального вывода данных пользователя и карточек на страницу
+  renderFirstData() {
+    return Promise.All([this.getDataUser()], [this.getInitialCards()]);
+  }
+
+  // Проверка данных лайка карточки ============================================
+  getLikeCardId(id, like) {
+    return fetch(`${this._url}/cards/likes/${id}`, {
+      method: like ? "DELETE" : "PUT",
       headers: this._headers,
     }).then(this._checkResponsPromise);
   }
 
   // Заменить данные пользователя (PATCH) ========================================
-  /* changeDataUser(data) {
-    console.log(data);
+  changeDataUser(data) {
     return fetch(this._url + "/users/me ", {
       method: "PATCH",
       headers: this._headers,
@@ -49,6 +64,30 @@ export class Api {
     }).then(this._checkResponsPromise);
   }
 
+  // Заменить аватар пользователя (PATCH) ========================================
+  changeAvatarUser(data) {
+    return fetch(this._url + "/users/avatar ", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar,
+      }),
+    }).then(this._checkResponsPromise);
+  }
+
+  // Удалить карточку пользователя (POST) ========================================
+  deleteCardUser(idCard) {
+    console.log(idCard);
+    return fetch(this._url + "/cards/cardId ", {
+      method: "DELETE",
+      headers: this._headers,
+      body: JSON.stringify({
+        cardId: idCard,
+      }),
+    }).then(this._checkResponsPromise);
+  }
+
+  /*
   // Обработка данных 2-ух промисов changeDataUser и getDataUser ================
   processGetDataAndChangeData() {
     return Promise.All([this.getDataUser()], [this.changeDataUser()]);
