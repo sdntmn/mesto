@@ -6,8 +6,6 @@ export class PopupWithSubmit extends Popup {
     super(selectorPopup);
     this._form = selectorPopup.querySelector(".popup__form");
     this._handleDeleteCard = null;
-    this._popupButton = this._form.querySelector(".popup__button");
-    this._popupButtonText = this._popupButton.textContent;
   }
 
   changeFunction(deleteCard) {

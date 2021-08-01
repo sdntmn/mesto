@@ -31,7 +31,6 @@ import {
 import { PopupWithSubmit } from "../scripts/PopupWithSubmit.js";
 
 // Запрос API =========================================================
-let userId = null;
 const configApi = {
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-26",
   headers: {
@@ -56,6 +55,7 @@ const dataCard = new Section(
 
 // Получение данных пользователя c сервера и вывод на страницу =====================
 let dataUserServer = null;
+let userId = null;
 
 api
   .getDataUser()
@@ -80,6 +80,10 @@ api
 // используется при создании карточки в колбэк - клика на карточку
 const launchPopupImg = new PopupWithImage(popupFoto);
 launchPopupImg.setEventListeners();
+
+// Удаление карточек пользователя ==================================================
+const popupFormDelete = new PopupWithSubmit(popupDelete);
+popupFormDelete.setEventListeners();
 
 // + Функция создания карточки ================================================================
 function createCard(item) {
@@ -153,10 +157,6 @@ const popupFormMesto = new PopupWithForm(popupMesto, {
   },
 });
 
-// Удаление карточек пользователя ==================================================
-const popupFormDelete = new PopupWithSubmit(popupDelete);
-popupFormDelete.setEventListeners();
-
 // Исправление(смена) данных пользователя ========================================
 const popupFormProfile = new PopupWithForm(popupProfile, {
   submit: (newData) => {
@@ -188,8 +188,6 @@ const popupFormAvatar = new PopupWithForm(popupAvatar, {
       .finally(() => popupFormAvatar.changeTextButton(false));
   },
 });
-
-// Вызов открытия попапа Удаления ======================================
 
 // Вызов открытия попапа Профиля ======================================
 btnOpenProfile.addEventListener("click", () => {
