@@ -45,8 +45,8 @@ export class Api {
   }
 
   // Проверка данных лайка карточки ============================================
-  getLikeCardId(id, like) {
-    return fetch(`${this._url}/cards/likes/${id}`, {
+  getLikeCardId(cardID, like) {
+    return fetch(this._url + `/cards/likes/${cardID}`, {
       method: like ? "DELETE" : "PUT",
       headers: this._headers,
     }).then(this._checkResponsPromise);
@@ -66,7 +66,8 @@ export class Api {
 
   // Заменить аватар пользователя (PATCH) ========================================
   changeAvatarUser(data) {
-    return fetch(this._url + "/users/avatar ", {
+    console.log(data.avatar);
+    return fetch(this._url + `/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -76,22 +77,13 @@ export class Api {
   }
 
   // Удалить карточку пользователя (POST) ========================================
-  deleteCardUser(idCard) {
-    console.log(idCard);
-    return fetch(this._url + "/cards/cardId ", {
+  deleteCardUser(cardID) {
+    return fetch(this._url + `/cards/${cardID}`, {
       method: "DELETE",
       headers: this._headers,
       body: JSON.stringify({
-        cardId: idCard,
+        _id: cardID,
       }),
     }).then(this._checkResponsPromise);
   }
-
-  /*
-  // Обработка данных 2-ух промисов changeDataUser и getDataUser ================
-  processGetDataAndChangeData() {
-    return Promise.All([this.getDataUser()], [this.changeDataUser()]);
-    
-  }
-  */
 }
