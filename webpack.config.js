@@ -9,7 +9,6 @@ module.exports = {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: "",
-    devtool: "inline-source-map",
   },
   module: {
     rules: [
