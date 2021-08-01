@@ -1,21 +1,21 @@
-<!DOCTYPE html> 
-<html lang="ru"> 
-  <head> 
-    <meta charset="UTF-8" /> 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
- 
-    <title>Mesto</title> 
-  </head> 
-  <body class="root"> 
-    <div class="page"> 
-      <header class="header page__cover"> 
-        <img 
-          class="logo" 
-          src="<%=require('./images/Vector.svg')%>" 
-          alt="Логотип сайта" 
-        /> 
-      </header> 
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mesto</title>
+  </head>
+  <body class="root">
+    <div class="page">
+      <header class="header page__cover">
+        <img
+          class="logo"
+          src="<%=require('./images/Vector.svg')%>"
+          alt="Логотип сайта"
+        />
+      </header>
 
       <main class="content page__cover">
         <section class="profiles page__cover">
@@ -24,7 +24,9 @@
               <div class="profile__data">
                 <div class="profile__change-avatar">
                   <img
-                    class="profile__avatar"                    
+                    class="profile__avatar"
+                    src="<%=require('./images/image.jpg')%>"
+                    alt="Фото пользователя"
                   />
                   <button
                     class="profile__opened-avatar"
@@ -71,6 +73,7 @@
                   aria-label="Поставить лайк"
                 ></button>
                 <span class="element__number-likes">0</span>
+              </div>
             </div>
           </li>
         </template>
@@ -185,11 +188,7 @@
               type="button"
               aria-label="Кнопка закрытия формы"
             ></button>
-            <img
-              class="popup__img"
-              src=""
-              alt=""
-            />
+            <img class="popup__img" src="#" alt="#" />
             <figcaption class="popup__img-name"></figcaption>
           </figure>
         </div>
@@ -246,11 +245,7 @@
             <fieldset class="popup__data">
               <legend class="popup__title">Вы уверены?</legend>
             </fieldset>
-            <button
-              type="submit"
-              class="popup__button"
-              aria-label="Да"            
-            >
+            <button type="submit" class="popup__button" aria-label="Да">
               Да
             </button>
           </form>
