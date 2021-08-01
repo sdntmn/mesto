@@ -41,7 +41,6 @@ export class PopupWithForm extends Popup {
   }
 
   // Перезаписывает родительский метод close, так как форма должна ещё и сбрасываться.
-
   close() {
     super.close();
     this._form.reset();

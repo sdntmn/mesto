@@ -106,7 +106,6 @@ function createCard(item) {
             console.log(`Ошибка удаления карточки ${error}`);
           });
       });
-      popupFormDelete.open();
     },
 
     function handleClickLike() {
