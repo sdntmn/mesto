@@ -12,7 +12,7 @@ export class Card {
   ) {
     this._data = data;
     this.idCard = data.owner._id; // id - карточки
-    this._likes = data.likes.length;
+    this._likesArr = data.likes;
     this._elementTemplate = document.querySelector(templateSelector);
     this._handleCardClick = handleCardClick; // функция колбэк открытия попап с картинкой при клике на карточку.
     this._handleDeleteCard = handleDeleteCard;
@@ -34,9 +34,17 @@ export class Card {
     this._element = this._getTemplate();
     this._elementImg = this._element.querySelector(".element__img");
     this._elementDel = this._element.querySelector(".element__trash");
+    this._element.querySelector(".element__number-likes").textContent =
+      this._likesArr.length;
     if (userId === this.idCard) {
       this._elementDel = this._elementDel.classList.add("element_is-visible");
     }
+    if (this._likesArr.find((item) => userId === item._id)) {
+      this._element
+        .querySelector(".element__like")
+        .classList.add("element__like_active");
+    }
+
     this._setEventListeners();
     this._elementImg.alt = `Фото. ${this._data.name}`;
     this._element.querySelector(".element__name-mesto").textContent =
@@ -45,8 +53,27 @@ export class Card {
     return this._element;
   }
 
-  likeClick() {
-    return this._likeClick;
+  checkLike(userId) {
+    return Boolean(
+      this._likesArr.find((item) => {
+        return userId === item._id;
+      })
+    );
+  }
+
+  _likeClick() {
+    this._element
+      .querySelector(".element__like")
+      .classList.toggle("element__like_active");
+  }
+
+  calcLike(data) {
+    this._likesArr = data.likes;
+    this._element.querySelector(".element__number-likes").textContent =
+      data.likes.length;
+    if (this.checkLike() === false) {
+      this._likeClick();
+    }
   }
 
   onDelete = () => {
@@ -54,25 +81,17 @@ export class Card {
     this._element = null;
   };
 
-  getLikeCount(data) {
-    this._likes = data.likes;
-    this._element
-      .querySelector(".element__like")
-      .classList.toggle("element__like_active");
-  }
-
   _setEventListeners() {
     this._element
       .querySelector(".element__like")
       .addEventListener("click", () => {
-        this.likeClick(this);
+        this._handleClickLike(this);
       });
     // слушатель клика удаления
     this._element
       .querySelector(".element__trash")
       .addEventListener("click", () => {
         this._handleDeleteCard(this);
-        console.log(this);
       });
     // слушатель клика по фото для открытия попапа фото
     this._element

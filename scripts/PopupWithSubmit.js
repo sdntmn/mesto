@@ -6,9 +6,13 @@ export class PopupWithSubmit extends Popup {
     super(selectorPopup);
     this._form = selectorPopup.querySelector(".popup__form");
     this._handleDeleteCard = null;
+    this._popupButton = this._form.querySelector(".popup__button");
+    this._popupButtonText = this._popupButton.textContent;
   }
 
-  /* у него переопределяется метод setEventListeners немного по-другому, нежели вы это делали в классе PopupWithForm - в нем вы передавали туда значения всех инпутов. Теперь же туда ничего не надо передавать, а просто вызывать функцию при сабмите. Соответственно никаких других методов у этого попапа не будет, так как нет формы которую надо валидировать.*/
+  changeFunction(deleteCard) {
+    this._handleDeleteCard = deleteCard;
+  }
 
   setEventListeners() {
     super.setEventListeners();
@@ -17,9 +21,5 @@ export class PopupWithSubmit extends Popup {
       this._handleDeleteCard();
       this.close();
     });
-  }
-
-  changeFunction(deleteCard) {
-    this._handleDeleteCard = deleteCard;
   }
 }

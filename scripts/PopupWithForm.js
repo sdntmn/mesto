@@ -8,6 +8,8 @@ export class PopupWithForm extends Popup {
     this._submit = submit; // колбэк сабмита формы
     this._form = selectorPopup.querySelector(".popup__form"); // форма попапа
     this._getInputValues = this._getInputValues.bind(this);
+    this._popupButton = this._form.querySelector(".popup__button");
+    this._popupButtonText = this._popupButton.textContent;
   }
 
   // собирает данные всех полей формы=====================================
@@ -18,6 +20,14 @@ export class PopupWithForm extends Popup {
       this.data[input.name] = input.value;
     });
     return this.data;
+  }
+
+  changeTextButton(load) {
+    if (load) {
+      this._popupButton.textContent = "Сохранение...";
+    } else {
+      this._popupButton.textContent = this._popupButtonText;
+    }
   }
 
   // Перезаписывает родительский метод (устанавлевает слушателя клика по иконке закрытия попапа) и добавляет обработчик сабмита формы

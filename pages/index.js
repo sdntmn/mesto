@@ -1,7 +1,6 @@
 import { Api } from "../scripts/Api.js";
 import { Card } from "../scripts/Card.js";
 import { FormValidate } from "../scripts/FormValidator.js";
-import { initialCards } from "../utils/constants";
 import { Section } from "../scripts/Section.js";
 import { PopupWithForm } from "../scripts/PopupWithForm.js";
 import { UserInfo } from "../scripts/UserInfo.js";
@@ -90,14 +89,31 @@ function createCard(item) {
     function handleCardClick() {
       launchPopupImg.open(item);
     },
-    function handleDeleteCard() {
-      console.log(item);
-      popupFormDelete.open();
 
-      deleteCard(item);
+    function handleDeleteCard() {
+      popupFormDelete.open();
+      popupFormDelete.changeFunction(() => {
+        api
+          .deleteCardUser(item._id)
+          .then(() => {
+            card.onDelete();
+          })
+          .catch((error) => {
+            console.log(`Ошибка удаления карточки ${error}`);
+          });
+      });
+      popupFormDelete.open();
     },
-    function handleClickLike(instCard) {
-      likeClick(instCard, count);
+
+    function handleClickLike() {
+      api
+        .getLikeCardId(item._id, card.checkLike(userId))
+        .then((data) => {
+          card.calcLike(data);
+        })
+        .catch((error) => {
+          console.log(`Ошибка данных лайков ${error}`);
+        });
     }
   );
 
@@ -110,7 +126,6 @@ api
   .getInitialCards()
   .then((res) => {
     dataCard.renderItems(res);
-    console.log(res);
   })
   .catch((error) => {
     console.log(`Ошибка получения данных карточки ${error}`);
@@ -123,6 +138,7 @@ const dataUserInfo = new UserInfo(userName, userJob, userAvatar);
 const popupFormMesto = new PopupWithForm(popupMesto, {
   submit: (userCard) => {
     const userCardData = userCard;
+    popupFormMesto.changeTextButton(true);
     api
       .setCardUser(userCardData)
       .then((userCard) => {
@@ -130,7 +146,8 @@ const popupFormMesto = new PopupWithForm(popupMesto, {
       })
       .catch((error) => {
         console.log(`Ошибка получения данных карточки ${error}`);
-      });
+      })
+      .finally(() => popupFormMesto.changeTextButton(false));
 
     popupFormMesto.close();
   },
@@ -140,41 +157,10 @@ const popupFormMesto = new PopupWithForm(popupMesto, {
 const popupFormDelete = new PopupWithSubmit(popupDelete);
 popupFormDelete.setEventListeners();
 
-// Функция удаления карточек ========================================================
-function deleteCard(instCard) {
-  console.log(instCard);
-  popupFormDelete.changeFunction(() => {
-    api
-      .deleteCardUser(instCard._id)
-      .then(() => {
-        console.log(instCard._id);
-        instCard.onDelete();
-      })
-      .catch((error) => {
-        console.log(`Ошибка удаления карточки ${error}`);
-      });
-  });
-  popupFormDelete.open();
-}
-/*
-// Функция проверки лайков и их удаление или установки =============================
-function handleClickLike(instCard) {
-  api.getLikeCardId(
-    instCard.idCard,
-    instCard
-      .likeClick()
-      .then((data) => {
-        instCard.setLike(data);
-      })
-      .catch((error) => {
-        console.log(`Ошибка данных лайков ${error}`);
-      })
-  );
-}
-*/
 // Исправление(смена) данных пользователя ========================================
 const popupFormProfile = new PopupWithForm(popupProfile, {
   submit: (newData) => {
+    popupFormProfile.changeTextButton(true);
     api
       .changeDataUser(newData)
       .then(() => {
@@ -182,18 +168,24 @@ const popupFormProfile = new PopupWithForm(popupProfile, {
         dataUserInfo.updateUserInfo();
         popupFormProfile.close();
       })
-      .catch((error) => console.log(error));
-    //.finally(() => popupFormProfile.)
+      .catch((error) => console.log(`Ошибка данных ${error}`))
+      .finally(() => popupFormProfile.changeTextButton(false));
   },
 });
 
 // Исправление(смена) аватар ===========================================
 const popupFormAvatar = new PopupWithForm(popupAvatar, {
   submit: (newData) => {
-    api.changeAvatarUser(newData).then(() => {});
-    dataUserInfo.setUserAvatar(newData);
-    dataUserInfo.updateUserAvatar();
-    popupFormAvatar.close();
+    popupFormAvatar.changeTextButton(true);
+    api
+      .changeAvatarUser(newData)
+      .then(() => {
+        dataUserInfo.setUserAvatar(newData);
+        dataUserInfo.updateUserAvatar();
+        popupFormAvatar.close();
+      })
+      .catch((error) => console.log(`Ошибка данных ${error}`))
+      .finally(() => popupFormAvatar.changeTextButton(false));
   },
 });
 
