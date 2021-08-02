@@ -1,10 +1,11 @@
-import { Api } from "../scripts/Api.js";
-import { Card } from "../scripts/Card.js";
-import { FormValidate } from "../scripts/FormValidator.js";
-import { Section } from "../scripts/Section.js";
-import { PopupWithForm } from "../scripts/PopupWithForm.js";
-import { UserInfo } from "../scripts/UserInfo.js";
-import { PopupWithImage } from "../scripts/PopupWithImage.js";
+import { Api } from "../components/Api.js";
+import { Card } from "../components/Card.js";
+import { FormValidate } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { UserInfo } from "../components/UserInfo.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithSubmit } from "../components/PopupWithSubmit.js";
 import "./index.css";
 import {
   btnOpenAvatar,
@@ -28,7 +29,6 @@ import {
   formProfile,
   token,
 } from "../utils/constants";
-import { PopupWithSubmit } from "../scripts/PopupWithSubmit.js";
 
 // Запрос API =========================================================
 const configApi = {
@@ -43,11 +43,11 @@ const configApi = {
 const api = new Api(configApi);
 
 // + Отрисовка элементов на странице ==========================================================
-const dataCard = new Section(
+const cardList = new Section(
   {
     // отвечает за создание и отрисовку данных на странице
     renderer: (item) => {
-      dataCard.addItem(createCard(item));
+      cardList.addItem(createCard(item));
     },
   },
   containerSelector
@@ -62,24 +62,20 @@ api
   .then((data) => {
     userId = data._id;
 
-    dataUserServer = {
-      name: data.name,
-      about: data.about,
-      avatar: data.avatar,
-    };
-    dataUserInfo.setUserInfo(dataUserServer);
-    dataUserInfo.setUserAvatar(dataUserServer);
-    dataUserInfo.updateUserInfo();
-    dataUserInfo.updateUserAvatar();
+    userInfo.setUserInfo(data);
+    userInfo.setUserAvatar(data);
   })
   .catch((error) => {
     console.log(`Ошибка получения данных о пользователе ${error}`);
   });
 
+// Обработка данных через класс UserInfo ===========================================
+const userInfo = new UserInfo(userName, userJob, userAvatar);
+
 // + обработка попапа фото ==============================================
 // используется при создании карточки в колбэк - клика на карточку
-const launchPopupImg = new PopupWithImage(popupFoto);
-launchPopupImg.setEventListeners();
+const popupImage = new PopupWithImage(popupFoto);
+popupImage.setEventListeners();
 
 // Удаление карточек пользователя ==================================================
 const popupFormDelete = new PopupWithSubmit(popupDelete);
@@ -91,7 +87,7 @@ function createCard(item) {
     item,
     templateSelector,
     function handleCardClick() {
-      launchPopupImg.open(item);
+      popupImage.open(item);
     },
 
     function handleDeleteCard() {
@@ -101,6 +97,7 @@ function createCard(item) {
           .deleteCardUser(item._id)
           .then(() => {
             card.onDelete();
+            popupFormDelete.close();
           })
           .catch((error) => {
             console.log(`Ошибка удаления карточки ${error}`);
@@ -112,6 +109,7 @@ function createCard(item) {
       api
         .getLikeCardId(item._id, card.checkLike(userId))
         .then((data) => {
+          console.log(data);
           card.calcLike(data);
         })
         .catch((error) => {
@@ -124,74 +122,75 @@ function createCard(item) {
 }
 
 // + Первоначальный вывод карточек из массива Api с сервера ====================================
-
+//Для синхронного первоначального вывода данных пользователя и карточек на страницу
+//  renderFirstData() {
+//    return Promise.All([this.getDataUser()], [this.getInitialCards()]);
+//  }
+// У меня же он есть, или я чего то не понимаю, наставник пока молчит
 api
   .getInitialCards()
   .then((res) => {
-    dataCard.renderItems(res);
+    cardList.renderItems(res);
   })
   .catch((error) => {
     console.log(`Ошибка получения данных карточки ${error}`);
   });
 
-// Обработка данных через класс UserInfo ===========================================
-const dataUserInfo = new UserInfo(userName, userJob, userAvatar);
-
 // Добавление новых карточек ==========================================
-const popupFormMesto = new PopupWithForm(popupMesto, {
+const popupAddCard = new PopupWithForm(popupMesto, {
   submit: (userCard) => {
     const userCardData = userCard;
-    popupFormMesto.changeTextButton(true);
+    popupAddCard.renderLoading(true);
     api
       .setCardUser(userCardData)
       .then((userCard) => {
-        dataCard.addItem(createCard(userCard), false);
+        cardList.addItem(createCard(userCard), false);
+        popupAddCard.close();
       })
       .catch((error) => {
         console.log(`Ошибка получения данных карточки ${error}`);
       })
-      .finally(() => popupFormMesto.changeTextButton(false));
-
-    popupFormMesto.close();
+      .finally(() => popupAddCard.renderLoading(false));
   },
 });
 
 // Исправление(смена) данных пользователя ========================================
 const popupFormProfile = new PopupWithForm(popupProfile, {
   submit: (newData) => {
-    popupFormProfile.changeTextButton(true);
+    popupFormProfile.renderLoading(true);
     api
       .changeDataUser(newData)
-      .then(() => {
-        dataUserInfo.setUserInfo(newData);
-        dataUserInfo.updateUserInfo();
+      .then((newData) => {
+        console.log(newData);
+
+        userInfo.setUserInfo(newData);
         popupFormProfile.close();
       })
       .catch((error) => console.log(`Ошибка данных ${error}`))
-      .finally(() => popupFormProfile.changeTextButton(false));
+      .finally(() => popupFormProfile.renderLoading(false));
   },
 });
 
-// Исправление(смена) аватар ===========================================
+// Change аватар ===========================================
+
 const popupFormAvatar = new PopupWithForm(popupAvatar, {
   submit: (newData) => {
-    popupFormAvatar.changeTextButton(true);
+    popupFormAvatar.renderLoading(true);
     api
       .changeAvatarUser(newData)
-      .then(() => {
-        dataUserInfo.setUserAvatar(newData);
-        dataUserInfo.updateUserAvatar();
+      .then((newData) => {
+        userInfo.setUserAvatar(newData);
         popupFormAvatar.close();
       })
       .catch((error) => console.log(`Ошибка данных ${error}`))
-      .finally(() => popupFormAvatar.changeTextButton(false));
+      .finally(() => popupFormAvatar.renderLoading(false));
   },
 });
 
 // Вызов открытия попапа Профиля ======================================
 btnOpenProfile.addEventListener("click", () => {
   validProfile.resetInputError();
-  const dataUser = dataUserInfo.getUserInfo();
+  const dataUser = userInfo.getUserInfo();
   inputJob.value = dataUser.about;
   inputName.value = dataUser.name;
   popupFormProfile.open();
@@ -208,7 +207,7 @@ btnOpenAvatar.addEventListener("click", () => {
 btnOpenMesto.addEventListener("click", () => {
   validMesto.resetInputError();
   validMesto.disableButtonElement();
-  popupFormMesto.open();
+  popupAddCard.open();
 });
 
 // Валидация форм =====================================================
@@ -219,4 +218,4 @@ const validAvatar = new FormValidate(config, formAvatar);
 // Вызов валидации ====================================================
 popupFormAvatar.setEventListeners(validAvatar.enableValidation());
 popupFormProfile.setEventListeners(validProfile.enableValidation());
-popupFormMesto.setEventListeners(validMesto.enableValidation());
+popupAddCard.setEventListeners(validMesto.enableValidation());
