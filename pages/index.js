@@ -54,13 +54,20 @@ const cardList = new Section(
 );
 
 // Получение данных пользователя c сервера и вывод на страницу =====================
-let dataUserServer = null;
 let userId = null;
-
+// пока использую крайний случай
 api
   .getDataUser()
   .then((data) => {
     userId = data._id;
+    api
+      .getInitialCards()
+      .then((res) => {
+        cardList.renderItems(res);
+      })
+      .catch((error) => {
+        console.log(`Ошибка получения данных карточки ${error}`);
+      });
 
     userInfo.setUserInfo(data);
     userInfo.setUserAvatar(data);
@@ -109,7 +116,6 @@ function createCard(item) {
       api
         .getLikeCardId(item._id, card.checkLike(userId))
         .then((data) => {
-          console.log(data);
           card.calcLike(data);
         })
         .catch((error) => {
@@ -120,21 +126,6 @@ function createCard(item) {
 
   return card.generateCard(userId);
 }
-
-// + Первоначальный вывод карточек из массива Api с сервера ====================================
-//Для синхронного первоначального вывода данных пользователя и карточек на страницу
-//  renderFirstData() {
-//    return Promise.All([this.getDataUser()], [this.getInitialCards()]);
-//  }
-// У меня же он есть, или я чего то не понимаю, наставник пока молчит
-api
-  .getInitialCards()
-  .then((res) => {
-    cardList.renderItems(res);
-  })
-  .catch((error) => {
-    console.log(`Ошибка получения данных карточки ${error}`);
-  });
 
 // Добавление новых карточек ==========================================
 const popupAddCard = new PopupWithForm(popupMesto, {
