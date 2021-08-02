@@ -44,7 +44,7 @@ export class Card {
         .querySelector(".element__like")
         .classList.add("element__like_active");
     }
-
+    this._listenerLike();
     this._setEventListeners();
     this._elementImg.alt = `Фото. ${this._data.name}`;
     this._element.querySelector(".element__name-mesto").textContent =
@@ -81,12 +81,15 @@ export class Card {
     this._element = null;
   };
 
-  _setEventListeners() {
+  _listenerLike() {
     this._element
       .querySelector(".element__like")
       .addEventListener("click", () => {
         this._handleClickLike(this);
       });
+  }
+
+  _setEventListeners() {
     // слушатель клика удаления
     this._element
       .querySelector(".element__trash")

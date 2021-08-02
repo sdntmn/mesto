@@ -1,8 +1,8 @@
 // отвечает за открытие и закрытие попапа
 
 export class Popup {
-  constructor(selectorPopup) {
-    this._selectorPopup = selectorPopup; // селектор попапа
+  constructor(popupElement) {
+    this._selectorPopup = popupElement; // селектор попапа
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 

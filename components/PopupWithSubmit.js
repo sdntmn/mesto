@@ -2,9 +2,9 @@
 import { Popup } from "./Popup.js";
 
 export class PopupWithSubmit extends Popup {
-  constructor(selectorPopup) {
-    super(selectorPopup);
-    this._form = selectorPopup.querySelector(".popup__form");
+  constructor(popupElement) {
+    super(popupElement);
+    this._form = popupElement.querySelector(".popup__form");
     this._handleDeleteCard = null;
   }
 
@@ -17,7 +17,6 @@ export class PopupWithSubmit extends Popup {
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleDeleteCard();
-      this.close();
     });
   }
 }
