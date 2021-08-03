@@ -8,14 +8,14 @@ export class Section {
     this._containerSelector = document.querySelector(containerSelector);
   }
 
-  // отвечает за отрисовку всех элементов.==============================
+  // отвечает за отрисовку всех элементов.====================================
   renderItems(res) {
     res.forEach((cardElement) => {
       this._renderer(cardElement);
     });
   }
 
-  // принимает DOM-элемент и добавляет его в контейнер =================
+  // принимает DOM-элемент и добавляет его в контейнер =======================
   addItem = (cardElement, order = true) => {
     if (order) {
       this._containerSelector.append(cardElement);

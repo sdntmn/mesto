@@ -4,7 +4,7 @@ export class Api {
     this._headers = configApi.headers;
   }
 
-  // Проверка работы промиса ======================================================
+  // Проверка работы промиса =================================================
   _checkResponsPromise(res) {
     return res.ok
       ? res.json()
@@ -12,14 +12,14 @@ export class Api {
           console.log(`Ошибка № ${res.status}  Текст ошибки: ${res.statusText}`)
         );
   }
-  // Получить список всех карточек в виде массива (GET) ===========================
+  // Получить список всех карточек в виде массива (GET) ======================
   getInitialCards() {
     return fetch(this._url + "/cards", {
       headers: this._headers,
     }).then(this._checkResponsPromise);
   }
 
-  // Добавить карточку (POST) =====================================================
+  // Добавить карточку (POST) ================================================
   setCardUser(userCard) {
     return fetch(this._url + "/cards", {
       method: "POST",
@@ -31,7 +31,7 @@ export class Api {
     }).then(this._checkResponsPromise);
   }
 
-  // Получить данные пользователя (GET) ==========================================
+  // Получить данные пользователя (GET) ======================================
   getDataUser(dataUser) {
     return fetch(this._url + "/users/me ", {
       headers: this._headers,
@@ -39,12 +39,12 @@ export class Api {
     }).then(this._checkResponsPromise);
   }
 
-  //Для синхронного первоначального вывода данных пользователя и карточек на страницу
+  //Для синхронного первоначального вывода данных User и Card ================
   renderFirstData() {
     return Promise.all([this.getDataUser(), this.getInitialCards()]);
   }
 
-  // Проверка данных лайка карточки ============================================
+  // Проверка данных лайка карточки ==========================================
   getLikeCardId(cardID, like) {
     return fetch(this._url + `/cards/likes/${cardID}`, {
       method: like ? "DELETE" : "PUT",
@@ -52,7 +52,7 @@ export class Api {
     }).then(this._checkResponsPromise);
   }
 
-  // Заменить данные пользователя (PATCH) ========================================
+  // Заменить данные пользователя (PATCH) ====================================
   changeDataUser(data) {
     return fetch(this._url + "/users/me ", {
       method: "PATCH",
@@ -64,7 +64,7 @@ export class Api {
     }).then(this._checkResponsPromise);
   }
 
-  // Заменить аватар пользователя (PATCH) ========================================
+  // Заменить аватар пользователя (PATCH) ====================================
   changeAvatarUser(data) {
     console.log(data.avatar);
     return fetch(this._url + `/users/me/avatar`, {
@@ -76,7 +76,7 @@ export class Api {
     }).then(this._checkResponsPromise);
   }
 
-  // Удалить карточку пользователя (POST) ========================================
+  // Удалить карточку пользователя (POST) ====================================
   deleteCardUser(cardID) {
     return fetch(this._url + `/cards/${cardID}`, {
       method: "DELETE",

@@ -8,6 +8,7 @@ export class PopupWithSubmit extends Popup {
     this._handleDeleteCard = null;
   }
 
+  // подмена функции при нажатии удаления на подтверждение на удаление =======
   changeFunction(deleteCard) {
     this._handleDeleteCard = deleteCard;
   }
