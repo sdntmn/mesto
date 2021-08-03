@@ -46,20 +46,25 @@ const api = new Api(configApi);
 let userId = null;
 let cardList;
 
-api.renderFirstData().then(([dataUser, dataCard]) => {
-  userId = dataUser._id;
-  cardList = new Section(
-    {
-      renderer: (item) => {
-        cardList.addItem(createCard(item));
+api
+  .renderFirstData()
+  .then(([dataUser, dataCard]) => {
+    userId = dataUser._id;
+    cardList = new Section(
+      {
+        renderer: (item) => {
+          cardList.addItem(createCard(item));
+        },
       },
-    },
-    containerSelector
-  );
-  cardList.renderItems(dataCard);
-  userInfo.setUserInfo(dataUser);
-  userInfo.setUserAvatar(dataUser);
-});
+      containerSelector
+    );
+    cardList.renderItems(dataCard);
+    userInfo.setUserInfo(dataUser);
+    userInfo.setUserAvatar(dataUser);
+  })
+  .catch((error) => {
+    console.log(`Ошибка получения данных ${error}`);
+  });
 
 // Обработка данных через класс UserInfo =====================================
 const userInfo = new UserInfo(userName, userJob, userAvatar);
