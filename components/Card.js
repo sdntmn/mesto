@@ -14,12 +14,12 @@ export class Card {
     this.idCard = data.owner._id; // id - карточки
     this._likesArr = data.likes;
     this._elementTemplate = document.querySelector(templateSelector);
-    this._handleCardClick = handleCardClick; // функция колбэк открытия попап с картинкой при клике на карточку.
+    this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
     this._handleClickLike = handleClickLike;
   }
 
-  //функция возвращала DOM-элемент.
+  //Функция возврата DOM-элемента ============================================
   _getTemplate = () => {
     // забираем размеку из HTML и клонируем элемент
     const cardElement = this._elementTemplate.content
@@ -61,12 +61,14 @@ export class Card {
     );
   }
 
+  // Переключение состояния лайка ==============================================
   _likeClick() {
     this._element
       .querySelector(".element__like")
       .classList.toggle("element__like_active");
   }
 
+  // Вывод количества лайков ===================================================
   calcLike(data) {
     this._likesArr = data.likes;
     this._element.querySelector(".element__number-likes").textContent =
@@ -76,11 +78,13 @@ export class Card {
     }
   }
 
+  // Удаление карточки =========================================================
   onDelete = () => {
     this._element.remove();
     this._element = null;
   };
 
+  // Слушатель клика по лайку ==================================================
   _listenerLike() {
     this._element
       .querySelector(".element__like")

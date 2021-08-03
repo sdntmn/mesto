@@ -6,7 +6,7 @@ export class UserInfo {
     this._selectorInfo = selectorInfo;
     this._selectorAvatar = selectorAvatar;
   }
-  // Принимает новые данные пользователя ============================
+  // Принимает новые данные пользователя =====================================
   setUserInfo(data) {
     if (data.name) {
       this._selectorNameUser.textContent = data.name;
@@ -19,13 +19,13 @@ export class UserInfo {
     }
   }
 
-  // Принимает новый аватар пользователя ============================
+  // Принимает новый аватар пользователя =====================================
   setUserAvatar(data) {
     if (data.avatar) {
       this._selectorAvatar.src = data.avatar;
     }
   }
-  // + Возвращает объект с данными пользователя========================
+  // + Возвращает объект с данными пользователя===============================
   getUserInfo() {
     return {
       name: this._selectorNameUser.textContent,
@@ -33,7 +33,7 @@ export class UserInfo {
     };
   }
 
-  // Возвращает аватар пользователя===================================
+  // Возвращает аватар пользователя===========================================
   getUserAvatar() {
     return {
       avatar: this._selectorAvatar.textContent,

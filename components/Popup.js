@@ -2,32 +2,31 @@
 
 export class Popup {
   constructor(popupElement) {
-    this._popupElement = popupElement; // селектор попапа
+    this._popupElement = popupElement;
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
-  // открытие попапа ==============================================
+  // открытие попапа =========================================================
   open() {
     this._popupElement.classList.add("popup_is-opened");
-    document.addEventListener("keydown", this._handleEscClose); // навесили слушателя
+    document.addEventListener("keydown", this._handleEscClose); //навесили слуш
   }
 
-  // закрытие попапа. ==============================================
-
+  // закрытие попапа. ========================================================
   close() {
     this._popupElement.classList.remove("popup_is-opened");
 
-    document.removeEventListener("keydown", this._handleEscClose); // удалили слушателя
+    document.removeEventListener("keydown", this._handleEscClose); //удалили сл
   }
 
-  // закрытие попапа по клавише ESC ================================
+  // закрытие попапа по клавише ESC ==========================================
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
       this.close();
     }
   }
 
-  // добавляет слушатель клика иконке закрытия попапа и по полю =====
+  // добавляет слушатель клика иконке закрытия попапа и по полю ==============
   setEventListeners() {
     this._popupElement.addEventListener("click", (evt) => {
       if (
