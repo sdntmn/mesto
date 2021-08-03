@@ -39,56 +39,41 @@ const configApi = {
   },
 };
 
-// + Запрос к Api =============================================================================
+// + Запрос к Api ============================================================
 const api = new Api(configApi);
 
-// + Отрисовка элементов на странице ==========================================================
-const cardList = new Section(
-  {
-    // отвечает за создание и отрисовку данных на странице
-    renderer: (item) => {
-      cardList.addItem(createCard(item));
-    },
-  },
-  containerSelector
-);
-
-// Получение данных пользователя c сервера и вывод на страницу =====================
+// Получение данных пользователя и карточек c сервера и вывод на страницу ====
 let userId = null;
-// пока использую крайний случай
-api
-  .getDataUser()
-  .then((data) => {
-    userId = data._id;
-    api
-      .getInitialCards()
-      .then((res) => {
-        cardList.renderItems(res);
-      })
-      .catch((error) => {
-        console.log(`Ошибка получения данных карточки ${error}`);
-      });
+let cardList;
 
-    userInfo.setUserInfo(data);
-    userInfo.setUserAvatar(data);
-  })
-  .catch((error) => {
-    console.log(`Ошибка получения данных о пользователе ${error}`);
-  });
+api.renderFirstData().then(([dataUser, dataCard]) => {
+  userId = dataUser._id;
+  cardList = new Section(
+    {
+      renderer: (item) => {
+        cardList.addItem(createCard(item));
+      },
+    },
+    containerSelector
+  );
+  cardList.renderItems(dataCard);
+  userInfo.setUserInfo(dataUser);
+  userInfo.setUserAvatar(dataUser);
+});
 
-// Обработка данных через класс UserInfo ===========================================
+// Обработка данных через класс UserInfo =====================================
 const userInfo = new UserInfo(userName, userJob, userAvatar);
 
-// + обработка попапа фото ==============================================
+// + обработка попапа фото ===================================================
 // используется при создании карточки в колбэк - клика на карточку
 const popupImage = new PopupWithImage(popupFoto);
 popupImage.setEventListeners();
 
-// Удаление карточек пользователя ==================================================
+// Удаление карточек пользователя ============================================
 const popupFormDelete = new PopupWithSubmit(popupDelete);
 popupFormDelete.setEventListeners();
 
-// + Функция создания карточки ================================================================
+// + Функция создания карточки ===============================================
 function createCard(item) {
   const card = new Card(
     item,
@@ -127,7 +112,7 @@ function createCard(item) {
   return card.generateCard(userId);
 }
 
-// Добавление новых карточек ==========================================
+// Добавление новых карточек =================================================
 const popupAddCard = new PopupWithForm(popupMesto, {
   submit: (userCard) => {
     const userCardData = userCard;
@@ -145,7 +130,7 @@ const popupAddCard = new PopupWithForm(popupMesto, {
   },
 });
 
-// Исправление(смена) данных пользователя ========================================
+// Исправление(смена) данных пользователя ====================================
 const popupFormProfile = new PopupWithForm(popupProfile, {
   submit: (newData) => {
     popupFormProfile.renderLoading(true);
@@ -162,7 +147,7 @@ const popupFormProfile = new PopupWithForm(popupProfile, {
   },
 });
 
-// Change аватар ===========================================
+// Change аватар =============================================================
 
 const popupFormAvatar = new PopupWithForm(popupAvatar, {
   submit: (newData) => {
@@ -178,7 +163,7 @@ const popupFormAvatar = new PopupWithForm(popupAvatar, {
   },
 });
 
-// Вызов открытия попапа Профиля ======================================
+// Вызов открытия попапа Профиля =============================================
 btnOpenProfile.addEventListener("click", () => {
   validProfile.resetInputError();
   const dataUser = userInfo.getUserInfo();
@@ -187,26 +172,26 @@ btnOpenProfile.addEventListener("click", () => {
   popupFormProfile.open();
 });
 
-// Вызов открытия попапа редактирование Аватар ========================
+// Вызов открытия попапа редактирование Аватар ===============================
 btnOpenAvatar.addEventListener("click", () => {
   validAvatar.resetInputError();
   validAvatar.disableButtonElement();
   popupFormAvatar.open();
 });
 
-// Вызов открытия попапа Место ========================================
+// Вызов открытия попапа Место ===============================================
 btnOpenMesto.addEventListener("click", () => {
   validMesto.resetInputError();
   validMesto.disableButtonElement();
   popupAddCard.open();
 });
 
-// Валидация форм =====================================================
+// Валидация форм ============================================================
 const validMesto = new FormValidate(config, formMesto);
 const validProfile = new FormValidate(config, formProfile);
 const validAvatar = new FormValidate(config, formAvatar);
 
-// Вызов валидации ====================================================
+// Вызов валидации ===========================================================
 popupFormAvatar.setEventListeners(validAvatar.enableValidation());
 popupFormProfile.setEventListeners(validProfile.enableValidation());
 popupAddCard.setEventListeners(validMesto.enableValidation());
