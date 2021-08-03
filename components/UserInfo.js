@@ -8,14 +8,22 @@ export class UserInfo {
   }
   // Принимает новые данные пользователя ============================
   setUserInfo(data) {
-    this._selectorNameUser.textContent = data.name;
-    this._selectorInfo.textContent = data.about;
-    this.setUserAvatar(data);
+    if (data.name) {
+      this._selectorNameUser.textContent = data.name;
+    }
+    if (data.about) {
+      this._selectorInfo.textContent = data.about;
+    }
+    if (data.avatar) {
+      this.setUserAvatar(data);
+    }
   }
 
   // Принимает новый аватар пользователя ============================
   setUserAvatar(data) {
-    this._selectorAvatar.src = data.avatar;
+    if (data.avatar) {
+      this._selectorAvatar.src = data.avatar;
+    }
   }
   // + Возвращает объект с данными пользователя========================
   getUserInfo() {
