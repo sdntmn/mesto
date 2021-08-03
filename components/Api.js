@@ -41,7 +41,7 @@ export class Api {
 
   //Для синхронного первоначального вывода данных пользователя и карточек на страницу
   renderFirstData() {
-    return Promise.All([this.getDataUser(), this.getInitialCards()]);
+    return Promise.all([this.getDataUser(), this.getInitialCards()]);
   }
 
   // Проверка данных лайка карточки ============================================
