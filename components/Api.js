@@ -76,7 +76,7 @@ export class Api {
     }).then(this._checkResponsPromise);
   }
 
-  // Удалить карточку пользователя (POST) ====================================
+  // Удалить карточку пользователя (DELETE) ====================================
   deleteCardUser(cardID) {
     return fetch(this._url + `/cards/${cardID}`, {
       method: "DELETE",
